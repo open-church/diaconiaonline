@@ -1,0 +1,5 @@
+{
+  "watch": ["server", "pages", "components"],
+  "ignore": [".next"],
+  "exec": "babel-node ./server/app.js"
+}
