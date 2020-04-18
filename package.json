@@ -12,8 +12,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "chalk": "^4.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.2.1",
+    "mongoose": "^5.9.7",
     "next": "^9.3.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
