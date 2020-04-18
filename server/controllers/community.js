@@ -5,8 +5,8 @@ import Community from '../models/community'
 
 export const getCommunity = async (req, res) => {
   try {
-    const { id } = req.params
-    const community = await Community.findById(id)
+    const { _id } = req.community
+    const community = await Community.findById(_id)
     if (community) return res.json(community)
     return res.status(404).json({ message: 'Comunidade não encontrada' })
   } catch (err) {
@@ -83,15 +83,15 @@ export const createCommunity = async (req, res) => {
 
 export const updateCommunity = async (req, res) => {
   try {
+    const { _id } = req.community
     const {
-      name, cnpj, email, newEmail, password,
+      name, cnpj, newEmail,
       stock, financialDetails, address
     } = req.body
 
     await Community.findOne(
       {
-        email,
-        password: md5(password)
+        _id
       }, async (err, community) => {
         if (err) throw err
         if (!community) return res.status(404).json({ message: 'Comunidade não cadastrada' })
@@ -101,6 +101,7 @@ export const updateCommunity = async (req, res) => {
         if (invalid.communityFinancialDetails(financialDetails)) return res.status(400).json({ message: 'CPF/CNPJ da conta bancária é inválido' })
         community.name = name || community.name
         community.cnpj = cnpj || community.cnpj
+        community.slug = slugGenerate(community.name)
         community.email = newEmail || community.email
         community.stock = stock || community.stock
         community.financialDetails = financialDetails || community.financialDetails
@@ -116,12 +117,11 @@ export const updateCommunity = async (req, res) => {
 
 export const updatePassword = async (req, res) => {
   try {
-    const {
-      email, password, newPassword
-    } = req.body
+    const { _id } = req.community
+    const { password, newPassword } = req.body
     await Community.findOne(
       {
-        email,
+        _id,
         password: md5(password)
       }, async (err, community) => {
         if (err) throw err
@@ -139,8 +139,8 @@ export const updatePassword = async (req, res) => {
 
 export const removeCommunity = async (req, res) => {
   try {
-    const { id } = req.params
-    const community = await Community.deleteOne({ _id: id })
+    const { _id } = req.community
+    const community = await Community.deleteOne({ _id })
     if (community.deletedCount > 0) return res.json({ message: 'Comunidade removida com sucesso' })
     return res.status(404).json({ message: 'Comunidade não encontrada' })
   } catch (err) {

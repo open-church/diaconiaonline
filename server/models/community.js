@@ -1,6 +1,9 @@
 import mongoose from 'mongoose'
 
 const communitySchema = new mongoose.Schema({
+  token: {
+    type: String
+  },
   name: {
     type: String,
     required: true
