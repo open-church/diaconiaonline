@@ -1,4 +1,8 @@
-export const validateEmail = (email) => {
-  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  return re.test(email)
+import { validateBr } from 'js-brasil'
+
+export default {
+  email: (email) => (!validateBr.email(email)),
+  communityCNPJ: (cnpj) => (cnpj && !validateBr.cnpj(cnpj)),
+  communityAddress: (address) => (!address || (address && !validateBr.cep(address.zipCode))),
+  communityFinancialDetails: (financialDetails) => financialDetails && !validateBr.cnpj(financialDetails.doc) && !validateBr.cpf(financialDetails.doc)
 }
