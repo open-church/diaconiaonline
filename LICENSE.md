@@ -1,6 +1,6 @@
 BSD 2-Clause License
 
-Copyright (c) 2020, Márcio Vinícius Sena
+Copyright (c) 2020-2021, Open Church
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
