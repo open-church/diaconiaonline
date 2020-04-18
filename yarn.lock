@@ -6586,17 +6586,15 @@ terser@^4.1.2:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
-<<<<<<< HEAD
 tether-fix@^1.4.0-fix-es:
   version "1.4.0-fix-es"
   resolved "https://registry.yarnpkg.com/tether-fix/-/tether-fix-1.4.0-fix-es.tgz#dd216bd7f955fa56b94e6f24c3de7e969824b1d8"
   integrity sha1-3SFr1/lV+la5Tm8kw95+lpgksdg=
-=======
+
 text-mask-addons@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/text-mask-addons/-/text-mask-addons-3.8.0.tgz#17b61ef665a4f36811f2ea1f01a223b4be61ab26"
   integrity sha1-F7Ye9mWk82gR8uofAaIjtL5hqyY=
->>>>>>> 891d5d928fbebb3cd672cd3cebcdba235e4ae6d6
 
 text-table@^0.2.0:
   version "0.2.0"
