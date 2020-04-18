@@ -19,7 +19,7 @@ export const communityRelations = [
 
 export const occupations = [
   {
-    name: 'aposentado',
+    name: 'retired',
     label: 'Aposentado'
   },
   {
@@ -35,7 +35,7 @@ export const occupations = [
     label: 'Empregado'
   },
   {
-    name: 'retired',
+    name: 'unemployed',
     label: 'Desempregado'
   },
   {

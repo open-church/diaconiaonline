@@ -1,5 +1,6 @@
 import md5 from 'md5'
 
+import { slugGenerate } from '../helpers/functions'
 import invalid from '../helpers/validators'
 import Community from '../models/community'
 
@@ -25,17 +26,6 @@ const codeGenerate = async () => {
   return code
 }
 
-const slugGenerate = (name) => {
-  return name
-    .toString()
-    .toLowerCase()
-    .normalize('NFD')
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-')
-}
-
 export const createCommunity = async (req, res) => {
   try {
     const {
@@ -52,7 +42,7 @@ export const createCommunity = async (req, res) => {
           if (community) return res.status(400).json({ message: 'Comunidade já cadastrada' })
           if (invalid.email(email)) return res.status(400).json({ message: 'Email inválido' })
           if (invalid.communityCNPJ(cnpj)) return res.status(400).json({ message: 'CNPJ inválido' })
-          if (invalid.communityAddress(address)) return res.status(400).json({ message: 'CEP inválido' })
+          if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
           if (invalid.communityFinancialDetails(financialDetails)) return res.status(400).json({ message: 'CPF/CNPJ da conta bancária é inválido' })
           const code = await codeGenerate()
           const newCommunity = await new Community({
@@ -97,7 +87,7 @@ export const updateCommunity = async (req, res) => {
         if (!community) return res.status(404).json({ message: 'Comunidade não cadastrada' })
         if (newEmail && invalid.email(newEmail)) return res.status(400).json({ message: 'Email inválido' })
         if (invalid.communityCNPJ(cnpj)) return res.status(400).json({ message: 'CNPJ inválido' })
-        if (invalid.communityAddress(address)) return res.status(400).json({ message: 'CEP inválido' })
+        if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
         if (invalid.communityFinancialDetails(financialDetails)) return res.status(400).json({ message: 'CPF/CNPJ da conta bancária é inválido' })
         community.name = name || community.name
         community.cnpj = cnpj || community.cnpj
@@ -133,7 +123,7 @@ export const updatePassword = async (req, res) => {
       }
     )
   } catch (err) {
-    return res.status(500).json({ message: 'Erro desconhecido ao atualizar as credenciais comunidade', err })
+    return res.status(500).json({ message: 'Erro desconhecido ao atualizar as credenciais da comunidade', err })
   }
 }
 
