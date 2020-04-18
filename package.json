@@ -16,6 +16,7 @@
     "chalk": "^4.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "js-brasil": "^2.1.0",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.2.1",
     "mongoose": "^5.9.7",
