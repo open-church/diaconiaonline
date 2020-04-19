@@ -5,9 +5,13 @@ import { colors } from '../../utils/variables'
 
 export const PageContainer = styled(Container)`
   background: ${colors.blueZodiac};
-  height: 100vh;
+  height: calc(100vh - 40px);
   max-width: 100vw;
   padding: 0;
+
+  @media (max-width: 767px) {
+    height: auto;
+  }
   
   & > .row {
     height: 100%;
@@ -36,17 +40,34 @@ export const ButtonsWrapper = styled.div`
 `
 
 export const BgCol = styled(Col)`
-  background: url('./images/diaconia-online-home-bg.png') 100% center/cover;
+  && {
+    background: url('./images/diaconia-online-home-bg.png') 100% center/cover;
+    min-height: 280px;
+
+    @media (max-width: 992px) {
+      background-position: top center;
+    }
+  }
 `
 
 export const H2 = styled.h2`
   color: ${colors.coralRed};
   font-size: 2.75rem;
   line-height: 1.1;
+
+  @media (max-width: 992px) {
+    font-size: 1.87rem;
+    margin: 0 0 15px 0;
+  }
 `
 
 export const P = styled.p`
   color: ${colors.white};
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 1.5;
+  margin-top: 0;
+
+  @media (max-width: 992px) {
+    font-size: 0.93rem;
+  }
 `
