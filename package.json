@@ -15,11 +15,8 @@
     "@bootstrap-styled/provider": "^2.0.2",
     "@bootstrap-styled/v4": "^3.4.0",
     "body-parser": "^1.19.0",
-<<<<<<< HEAD
     "bootstrap-styled": "^2.7.2",
-=======
     "cep-promise": "^3.0.9",
->>>>>>> 154826ec27198dd49e44bb453ce42db5b5b6126e
     "chalk": "^4.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
