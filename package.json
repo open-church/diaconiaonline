@@ -2,7 +2,7 @@
   "name": "diaconiaonline",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/open-church/diaconiaonline",
+  "repository": "https://github.com/openchurch/diaconiaonline",
   "license": "MIT",
   "private": false,
   "scripts": {
