@@ -1,12 +1,13 @@
 import md5 from 'md5'
 
+import { slugGenerate } from '../helpers/functions'
 import invalid from '../helpers/validators'
 import Community from '../models/community'
 
 export const getCommunity = async (req, res) => {
   try {
-    const { id } = req.params
-    const community = await Community.findById(id)
+    const { _id } = req.community
+    const community = await Community.findById(_id)
     if (community) return res.json(community)
     return res.status(404).json({ message: 'Comunidade não encontrada' })
   } catch (err) {
@@ -25,17 +26,6 @@ const codeGenerate = async () => {
   return code
 }
 
-const slugGenerate = (name) => {
-  return name
-    .toString()
-    .toLowerCase()
-    .normalize('NFD')
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-')
-}
-
 export const createCommunity = async (req, res) => {
   try {
     const {
@@ -52,7 +42,7 @@ export const createCommunity = async (req, res) => {
           if (community) return res.status(400).json({ message: 'Comunidade já cadastrada' })
           if (invalid.email(email)) return res.status(400).json({ message: 'Email inválido' })
           if (invalid.communityCNPJ(cnpj)) return res.status(400).json({ message: 'CNPJ inválido' })
-          if (invalid.communityAddress(address)) return res.status(400).json({ message: 'CEP inválido' })
+          if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
           if (invalid.communityFinancialDetails(financialDetails)) return res.status(400).json({ message: 'CPF/CNPJ da conta bancária é inválido' })
           const code = await codeGenerate()
           const newCommunity = await new Community({
@@ -83,24 +73,25 @@ export const createCommunity = async (req, res) => {
 
 export const updateCommunity = async (req, res) => {
   try {
+    const { _id } = req.community
     const {
-      name, cnpj, email, newEmail, password,
+      name, cnpj, newEmail,
       stock, financialDetails, address
     } = req.body
 
     await Community.findOne(
       {
-        email,
-        password: md5(password)
+        _id
       }, async (err, community) => {
         if (err) throw err
         if (!community) return res.status(404).json({ message: 'Comunidade não cadastrada' })
         if (newEmail && invalid.email(newEmail)) return res.status(400).json({ message: 'Email inválido' })
         if (invalid.communityCNPJ(cnpj)) return res.status(400).json({ message: 'CNPJ inválido' })
-        if (invalid.communityAddress(address)) return res.status(400).json({ message: 'CEP inválido' })
+        if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
         if (invalid.communityFinancialDetails(financialDetails)) return res.status(400).json({ message: 'CPF/CNPJ da conta bancária é inválido' })
         community.name = name || community.name
         community.cnpj = cnpj || community.cnpj
+        community.slug = slugGenerate(community.name)
         community.email = newEmail || community.email
         community.stock = stock || community.stock
         community.financialDetails = financialDetails || community.financialDetails
@@ -116,12 +107,11 @@ export const updateCommunity = async (req, res) => {
 
 export const updatePassword = async (req, res) => {
   try {
-    const {
-      email, password, newPassword
-    } = req.body
+    const { _id } = req.community
+    const { password, newPassword } = req.body
     await Community.findOne(
       {
-        email,
+        _id,
         password: md5(password)
       }, async (err, community) => {
         if (err) throw err
@@ -133,14 +123,14 @@ export const updatePassword = async (req, res) => {
       }
     )
   } catch (err) {
-    return res.status(500).json({ message: 'Erro desconhecido ao atualizar as credenciais comunidade', err })
+    return res.status(500).json({ message: 'Erro desconhecido ao atualizar as credenciais da comunidade', err })
   }
 }
 
 export const removeCommunity = async (req, res) => {
   try {
-    const { id } = req.params
-    const community = await Community.deleteOne({ _id: id })
+    const { _id } = req.community
+    const community = await Community.deleteOne({ _id })
     if (community.deletedCount > 0) return res.json({ message: 'Comunidade removida com sucesso' })
     return res.status(404).json({ message: 'Comunidade não encontrada' })
   } catch (err) {

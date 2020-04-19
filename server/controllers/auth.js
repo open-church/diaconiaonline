@@ -14,7 +14,7 @@ const createToken = auth => {
 
 const checkToken = token => {
   try {
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+    return jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
       return !err
     })
   } catch (err) {
@@ -30,22 +30,23 @@ const checkUser = async token => {
   return null
 }
 
-export const checkSession = (req, res, next) => {
+export const checkSession = async (req, res, next) => {
   try {
     let token = req.headers.authorization
-    token = token.slice(7, token.length)
+    token = token && token.slice(7, token.length)
 
     if (token && checkToken(token)) {
-      const user = checkUser(token)
+      const user = await checkUser(token)
       if (user) {
-        req[user.type] = user
+        req[user.type] = user._doc
         return next()
       }
     }
     res.status(401).json({ message: 'Credenciais Inválidas' })
   } catch (err) {
     return res.status(500).json({
-      message: 'Erro desconhecido ao verificar token'
+      message: 'Erro desconhecido ao verificar token',
+      err
     })
   }
 }
@@ -56,10 +57,11 @@ export const login = async (req, res) => {
     const Model = entity === 'community' ? Community : People
     const doc = await Model.findOne({ email, password: md5(password) })
     if (!doc) return res.status(401).json({ message: 'Credenciais inválidas' })
-    const token = createToken()
+    const token = createToken({ id: doc._id })
     doc.token = token
     doc.save()
     res.json({
+      email: doc.email,
       token
     })
   } catch (err) {

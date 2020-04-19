@@ -3,6 +3,9 @@ import mongoose from 'mongoose'
 import { communityRelations, occupations } from '../helpers/enums'
 
 const peopleSchema = new mongoose.Schema({
+  token: {
+    type: String
+  },
   name: {
     type: String,
     required: true
@@ -20,8 +23,7 @@ const peopleSchema = new mongoose.Schema({
     required: true
   },
   cpf: {
-    type: String,
-    required: true
+    type: String
   },
   communityRelation: {
     type: String,
@@ -34,15 +36,15 @@ const peopleSchema = new mongoose.Schema({
     enum: Object.values(occupations).map(({ name }) => name)
   },
   specialNeeds: {
-    value: String,
-    description: [String]
+    value: Boolean,
+    description: String
   },
   controlledMedication: {
-    value: String,
-    description: [String]
+    value: Boolean,
+    description: String
   },
   urgencies: {
-    type: [String]
+    type: String
   },
   phone: String,
   address: {
