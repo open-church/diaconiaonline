@@ -19,7 +19,10 @@ function MyApp ({ Component, pageProps }) {
         '$btn-secondary-border': `${colors.blueZodiac}`,
         '$btn-info-color': `${colors.white}`,
         '$btn-info-bg': `${colors.burningOrange}`,
-        '$btn-info-border': `${colors.burningOrange}`
+        '$btn-info-border': `${colors.burningOrange}`,
+        '$btn-danger-color': `${colors.burningOrange}`,
+        '$btn-danger-bg': `${colors.white}`,
+        '$btn-danger-border': `${colors.burningOrange}`
       }}>
         <Component {...pageProps} />
       </BootstrapProvider>

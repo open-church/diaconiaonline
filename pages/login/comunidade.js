@@ -11,7 +11,7 @@ import { LoginSchema } from '../../schemas/login'
 
 function UserLogin () {
   return (
-    <ThemeProvider theme={{ mode: 'user' }}>
+    <ThemeProvider theme={{ mode: 'community' }}>
       <S.PageContainer fluid>
         <B.Row>
           <S.BgCol lg="5" xl="7">
@@ -43,8 +43,8 @@ function UserLogin () {
                     ) : null}
                     <Link href='/'><S.Forgot>Esqueci minha senha</S.Forgot></Link>
                     <S.ButtonsWrapper>
-                      <E.CustomButton width="42%" type="submit" color="primary">Fazer login</E.CustomButton>
-                      <E.CustomButton width="54%" color="secondary">Cadastrar como usuário</E.CustomButton>
+                      <E.CustomButton width="42%" type="submit" color="info">Fazer login</E.CustomButton>
+                      <E.CustomButton width="54%" color="danger">Cadastrar como igreja</E.CustomButton>
                     </S.ButtonsWrapper>
                   </Form>
                 )}

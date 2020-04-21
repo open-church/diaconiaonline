@@ -1,8 +1,14 @@
 import { Container, Col } from '@bootstrap-styled/v4'
 import { Field } from 'formik'
 import styled from 'styled-components'
+import theme from 'styled-theming'
 
 import { colors } from '../../utils/variables'
+
+const color = theme('mode', {
+  user: colors.blueZodiac,
+  community: colors.burningOrange
+})
 
 export const PageContainer = styled(Container)`
   background: ${colors.wildSand};
@@ -50,13 +56,13 @@ export const BgCol = styled(Col)`
 `
 
 export const H3 = styled.h2`
-  color: ${colors.blueZodiac};
+  color: ${color};
   font-size: 1.875rem;
   line-height: 1.666;
 `
 
 export const P = styled.p`
-  color: ${colors.blueZodiac};
+  color: ${color};
   font-size: 20px;
   line-height: 1.5;
 `
@@ -64,7 +70,7 @@ export const P = styled.p`
 export const CustomField = styled(Field)`
   width: 100%;
   padding: 15px 25px;
-  border: solid 1px ${colors.blueZodiac};
+  border: solid 1px ${color};
   border-radius: 3px;
 
   &::placeholder {
@@ -87,7 +93,7 @@ export const Error = styled.span`
 `
 
 export const Forgot = styled.a`
-  color: ${colors.blueZodiac};
+  color: ${color};
   display: inline-block;
   line-height: 1.375;
   margin: 15px 0;
