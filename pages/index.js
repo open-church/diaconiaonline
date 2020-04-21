@@ -3,14 +3,14 @@ import React from 'react'
 import * as B from '@bootstrap-styled/v4'
 
 import * as E from '../components/elements/styles'
+import Footer from '../components/footer/'
 import * as S from '../components/homeStyles/styles'
 
 function HomePage () {
   return (
     <S.PageContainer fluid>
       <B.Row>
-        <S.BgCol lg="5" xl="6">
-        </S.BgCol>
+        <S.BgCol lg="5" xl="6" />
         <B.Col lg="7" xl="6">
           <S.ContentWrapper>
             <S.H2>Organize e acompanhe os recursos de sua comunidade com um clique.</S.H2>
@@ -22,6 +22,7 @@ function HomePage () {
           </S.ContentWrapper>
         </B.Col>
       </B.Row>
+      <Footer />
     </S.PageContainer>
   )
 }
