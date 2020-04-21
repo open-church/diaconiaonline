@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { colors } from '../../utils/variables'
 
 export const PageContainer = styled(Container)`
-  background: ${colors.white};
+  background: ${colors.wildSand};
   height: 100vh;
   max-width: 100vw;
   padding: 0;
@@ -24,9 +24,14 @@ export const ContentWrapper = styled.div`
   max-width: 540px;
 
   @media (max-width: 992px) {
+    background: ${colors.white};
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(13,2,2,41);
+    height: auto;
     justify-content: flex-start;
-    margin-top: 15px;
+    margin: -125px 0 30px;
     max-width: none;
+    padding: 15px;
   }
 `
 
@@ -38,7 +43,10 @@ export const ButtonsWrapper = styled.div`
 `
 
 export const BgCol = styled(Col)`
-  background: url('../images/diaconia-online-login-bg.png') center/cover;
+  && {
+    background: url('../images/diaconia-online-login-bg.png') center/cover;
+    min-height: 284px;
+  }
 `
 
 export const H3 = styled.h2`

@@ -41,8 +41,8 @@ function UserLogin () {
                   ) : null}
                   <Link href='/'><S.Forgot>Esqueci minha senha</S.Forgot></Link>
                   <S.ButtonsWrapper>
-                    <E.CustomButton width="43%" type="submit" color="primary">Fazer login</E.CustomButton>
-                    <E.CustomButton width="53%" color="secondary">Cadastrar como usuário</E.CustomButton>
+                    <E.CustomButton width="42%" type="submit" color="primary">Fazer login</E.CustomButton>
+                    <E.CustomButton width="54%" color="secondary">Cadastrar como usuário</E.CustomButton>
                   </S.ButtonsWrapper>
                 </Form>
               )}

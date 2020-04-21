@@ -7,5 +7,6 @@ export const colors = {
   coralRed: '#FF3E46',
   macaroniAndCheese: '#FFBE7E',
   outerSpace: '#343B3F',
-  white: '#fff'
+  white: '#fff',
+  wildSand: '#f6f6f6'
 }
