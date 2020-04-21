@@ -12,9 +12,14 @@ const color = theme('mode', {
 
 export const PageContainer = styled(Container)`
   background: ${colors.wildSand};
-  height: 100vh;
+  height: calc(100vh - 40px);
   max-width: 100vw;
   padding: 0;
+
+  @media (max-width: 767px) {
+    height: auto;
+    min-height: calc(100vh - 40px);
+  }
   
   & > .row {
     height: 100%;
