@@ -16,7 +16,7 @@ function MyApp ({ Component, pageProps }) {
         '$btn-primary-border': `${colors.white}`,
         '$btn-secondary-bg': `${colors.white}`,
         '$btn-secondary-color': `${colors.blueZodiac}`,
-        '$btn-secondary-border': `${colors.white}`,
+        '$btn-secondary-border': `${colors.blueZodiac}`,
         '$btn-info-color': `${colors.white}`,
         '$btn-info-bg': `${colors.burningOrange}`,
         '$btn-info-border': `${colors.burningOrange}`
