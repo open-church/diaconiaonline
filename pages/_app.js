@@ -24,7 +24,7 @@ class MyApp extends App {
           '$btn-secondary-border': `${colors.white}`,
           '$btn-info-color': `${colors.white}`,
           '$btn-info-bg': `${colors.burningOrange}`,
-          '$btn-info-border': `${colors.burningOrange}`
+          '$btn-info-border': `${colors.burningOrange}`,
           '$btn-danger-color': `${colors.burningOrange}`,
           '$btn-danger-bg': `${colors.white}`,
           '$btn-danger-border': `${colors.burningOrange}`
