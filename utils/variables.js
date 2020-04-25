@@ -1,10 +1,12 @@
 export const colors = {
   black: '#000',
-  white: '#fff',
   blueZodiac: '#112349',
-  coralRed: '#FF3E46',
+  boulder: '#797979',
   burningOrange: '#FF703A',
   cloudBurst: '#22304E',
-  boulder: '#797979',
-  macaroniAndCheese: '#FFBE7E'
+  coralRed: '#FF3E46',
+  macaroniAndCheese: '#FFBE7E',
+  outerSpace: '#343B3F',
+  white: '#fff',
+  wildSand: '#f6f6f6'
 }

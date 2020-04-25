@@ -11,6 +11,7 @@ export const PageContainer = styled(Container)`
 
   @media (max-width: 767px) {
     height: auto;
+    min-height: calc(100vh - 40px);
   }
   
   & > .row {
@@ -30,6 +31,7 @@ export const ContentWrapper = styled.div`
     justify-content: flex-start;
     margin-top: 15px;
     max-width: none;
+    padding-bottom: 30px;
   }
 `
 
