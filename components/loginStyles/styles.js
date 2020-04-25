@@ -37,7 +37,7 @@ export const ContentWrapper = styled.div`
   @media (max-width: 992px) {
     background: ${colors.white};
     border-radius: 3px;
-    box-shadow: 0 3px 6px rgba(13,2,2,41);
+    box-shadow: 0 3px 6px rgba(13,2,2,0.41);
     height: auto;
     justify-content: flex-start;
     margin: -125px 0 30px;
