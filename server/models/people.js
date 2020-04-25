@@ -10,6 +10,10 @@ const peopleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  communityCode: {
+    type: String,
+    required: true
+  },
   slug: {
     type: String,
     required: true
