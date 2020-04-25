@@ -3,6 +3,7 @@ import md5 from 'md5'
 import { slugGenerate } from '../helpers/functions'
 import invalid from '../helpers/validators'
 import Community from '../models/community'
+import People from '../models/people'
 
 export const getCommunity = async (req, res) => {
   try {
@@ -12,6 +13,17 @@ export const getCommunity = async (req, res) => {
     return res.status(404).json({ message: 'Comunidade não encontrada' })
   } catch (err) {
     return res.status(500).json({ message: 'Erro desconhecido ao buscar uma comunidade', err })
+  }
+}
+
+export const getMembers = async (req, res) => {
+  try {
+    const { code } = req.community
+    if (!code) return res.status(404).json({ message: 'Comunidade não encontrada' })
+    const members = await People.find({ communityCode: code })
+    res.json({ members })
+  } catch (err) {
+    return res.status(500).json({ message: 'Erro desconhecido ao buscar membros da comunidade', err })
   }
 }
 
