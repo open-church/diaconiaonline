@@ -37,7 +37,7 @@ const TermsOfUse = () => (
     <p>O Titular poderá solicitar via e-mail ou correspondência ao Controlador, a qualquer momento, que sejam eliminados os seus dados pessoais não anonimizados. O Titular fica ciente de que poderá ser inviável ao Controlador continuar com o fornecimento do auxílio a partir da eliminação dos dados pessoais.</p>
     <h3>Direitos do Titular</h3>
     <p>O Titular tem direito a obter do Controlador, em relação aos dados por ele tratados,<br />a qualquer momento e mediante requisição:</p>
-    <ol style={{ listStyleType: 'upper-roman;' }}>
+    <ol style={{ listStyleType: 'upper-roman' }}>
       <li>confirmação da existência de tratamento;</li>
       <li>acesso aos dados;</li>
       <li>correção de dados incompletos, inexatos ou desatualizados;</li>
