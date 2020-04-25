@@ -8,5 +8,6 @@ export const colors = {
   macaroniAndCheese: '#FFBE7E',
   outerSpace: '#343B3F',
   white: '#fff',
-  wildSand: '#f6f6f6'
+  wildSand: '#f6f6f6',
+  alto: '#dadada'
 }
