@@ -4,12 +4,14 @@ import * as B from '@bootstrap-styled/v4'
 
 import * as E from '../components/elements/styles'
 import * as S from '../components/homeStyles/styles'
+import Navbar from '../components/navBar/'
 import Layout from '../components/layout'
 
 function HomePage () {
   return (
     <Layout>
       <S.PageContainer fluid>
+        <Navbar />
         <B.Row>
           <S.BgCol lg="5" xl="6" />
           <B.Col lg="7" xl="6">
