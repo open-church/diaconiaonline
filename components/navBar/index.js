@@ -15,13 +15,13 @@ import * as S from './styles'
 function Navbar () {
   const [open, setOpen] = useState(false)
   return (
-    <S.Navbar fixed="top" toggleable="lg" className={open && 'open'}>
+    <S.Navbar fixed="top" toggleable="lg" className={open ? 'open' : ''}>
       <Container>
         <div className={'d-flex justify-content-between'}>
           <NavbarBrand tag={A} href="/">
             <S.Image src="./images/diaconia-online.svg" alt="Diaconia Online"/>
           </NavbarBrand>
-          <NavbarToggler className={open && 'close'} onClick={() => setOpen(!open)} />
+          <NavbarToggler className={open ? 'close' : ''} onClick={() => setOpen(!open)} />
         </div>
         <Collapse navbar isOpen={open}>
           <Nav navbar className="ml-auto my-2 my-lg-0">
