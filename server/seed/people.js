@@ -1,4 +1,5 @@
 import faker from 'faker/locale/pt_BR'
+import md5 from 'md5'
 
 import { communityRelations, occupations } from '../helpers/enums'
 import { slugGenerate } from '../helpers/functions'
@@ -10,7 +11,7 @@ export const getPeople = (code) => {
     name: faker.name.findName(),
     slug: slugGenerate(faker.name.findName()),
     email: faker.internet.email(),
-    password: faker.internet.password(),
+    password: md5('123456'),
     cpf: faker.internet.password(),
     communityCode: code,
     communityRelation: communityRelations[randomNumber(communityRelations.length)].name,

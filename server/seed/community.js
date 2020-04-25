@@ -1,4 +1,5 @@
 import faker from 'faker/locale/pt_BR'
+import md5 from 'md5'
 
 import { slugGenerate } from '../helpers/functions'
 
@@ -9,7 +10,7 @@ export const getCommunity = (code) => {
     name: name,
     slug: slugGenerate(name),
     email: faker.internet.email().toLowerCase(),
-    password: faker.internet.password(),
+    password: md5('123456'),
     cnpj: faker.random.number().toString(),
     stock: {
       money: faker.finance.amount(),
