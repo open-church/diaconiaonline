@@ -15,6 +15,14 @@ export const getCommunity = async (req, res) => {
   }
 }
 
+export const getMembers = async (req, res) => {
+  try {
+
+  } catch (err) {
+    return res.status(500).json({ message: 'Erro desconhecido ao buscar membros da comunidade', err })
+  }
+}
+
 const codeGenerate = async () => {
   let community = true
   let code = null

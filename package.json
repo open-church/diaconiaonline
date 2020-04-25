@@ -7,6 +7,7 @@
   "private": false,
   "scripts": {
     "dev": "nodemon",
+    "seed": "babel-node ./server/seed/index.js",
     "lint": "eslint ./",
     "build": "next build",
     "start": "next start"
@@ -45,6 +46,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "^4.0.1",
+    "faker": "^4.1.0",
     "nodemon": "^2.0.2"
   }
 }
