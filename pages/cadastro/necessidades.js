@@ -7,10 +7,17 @@ import { ThemeProvider } from 'styled-components'
 import * as E from '../../components/elements/styles'
 import Layout from '../../components/layout'
 import * as S from '../../components/signupStyles/styles'
+import TermsOfUse from '../../components/termsOfUse'
 import { CommunityStockSchema, RELATIONS, OCCUPATIONS, ESPECIALNEEDS } from '../../schemas/userNeeds'
 
 function UserResources () {
   const [accept, setAccpet] = useState(false)
+  const [modal, setModal] = useState(false)
+
+  const handleModal = () => {
+    setModal(!modal)
+  }
+
   return (
     <Layout>
       <ThemeProvider theme={{ mode: 'user' }}>
@@ -108,7 +115,7 @@ function UserResources () {
                       <S.CheckBoxLabel>
                         <S.CustomCheckbox checked={accept} onChange={() => setAccpet(!accept)}/>
                         <S.Checkmark></S.Checkmark>
-                        Li e aceito os Termos de Uso
+                        Li e aceito os <S.TermsLink onClick={() => handleModal()}>Termos de Uso</S.TermsLink>
                       </S.CheckBoxLabel>
                       <S.ButtonsWrapper>
                         <E.CustomButton color="secondary">Voltar</E.CustomButton>
@@ -120,6 +127,12 @@ function UserResources () {
               </S.ContentWrapper>
             </B.Col>
           </B.Row>
+          <B.Modal isOpen={modal} toggle={() => handleModal()}>
+            <B.ModalHeader toggle={() => handleModal()}>Termos de Uso</B.ModalHeader>
+            <B.ModalBody>
+              <TermsOfUse />
+            </B.ModalBody>
+          </B.Modal>
         </S.PageContainer>
       </ThemeProvider>
     </Layout>

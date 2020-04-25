@@ -133,7 +133,7 @@ export const CheckBoxLabel = styled.label`
   position: relative;
   user-select: none;
 
-  &:hover input ~ span {
+  &:hover input + span {
     background-color: ${colors.boulder};
   }
 `
@@ -148,10 +148,10 @@ export const CustomCheckbox = styled.input.attrs(props => ({
   width: 0;
 
   &:checked {
-    & ~ span {
+    & + span {
       background-color: ${colors.outerSpace};
     }
-    & ~ span:after {
+    & + span:after {
       display: block;
     }
   }
@@ -178,6 +178,10 @@ export const Checkmark = styled.span`
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
+`
+
+export const TermsLink = styled.span`
+  color: ${colors.burningOrange};
 `
 
 export const CustomSelect = styled(Select)`
