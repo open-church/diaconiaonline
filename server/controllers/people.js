@@ -2,6 +2,7 @@ import md5 from 'md5'
 
 import { slugGenerate } from '../helpers/functions'
 import invalid from '../helpers/validators'
+import Community from '../models/community'
 import People from '../models/people'
 
 export const getPeople = async (req, res) => {
@@ -18,9 +19,12 @@ export const getPeople = async (req, res) => {
 export const createPeople = async (req, res) => {
   try {
     const {
-      name, cpf, email, password,
+      name, cpf, email, password, communityCode,
       occupation, communityRelation, address
     } = req.body
+
+    const community = await Community.findOne({ code: communityCode })
+    if (!community) return res.status(400).json({ message: 'Código de comunidade não encontrado' })
 
     await People.findOne(
       {
@@ -32,10 +36,9 @@ export const createPeople = async (req, res) => {
           if (invalid.email(email)) return res.status(400).json({ message: 'Email inválido' })
           if (invalid.peopleCPF(cpf)) return res.status(400).json({ message: 'CPF inválido' })
           if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
-          if (invalid.required(communityRelation)) return res.status(400).json({ message: 'Relação com a comunidade inválida' })
-          if (invalid.required(occupation)) return res.status(400).json({ message: 'Ocupação inválida' })
           const newPeople = await new People({
             name,
+            communityCode,
             slug: slugGenerate(name),
             cpf,
             email,

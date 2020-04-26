@@ -68,7 +68,7 @@ function CommunityLogin (props) {
                       <Link href='/'><S.Forgot>Esqueci minha senha</S.Forgot></Link>
                       <S.ButtonsWrapper>
                         <E.CustomButton width="42%" type="submit" color="info">Fazer login</E.CustomButton>
-                        <E.CustomButton width="54%" color="danger">Cadastrar como igreja</E.CustomButton>
+                        <E.CustomButton tag={B.A} href="/cadastro/comunidade" width="54%" color="danger">Cadastrar comunidade</E.CustomButton>
                       </S.ButtonsWrapper>
                     </Form>
                   )}

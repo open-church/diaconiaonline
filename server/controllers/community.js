@@ -47,7 +47,7 @@ export const createCommunity = async (req, res) => {
 
     await Community.findOne(
       {
-        $or: [{ cnpj }, { email }]
+        email
       }, async (err, community) => {
         if (err) throw err
         try {
