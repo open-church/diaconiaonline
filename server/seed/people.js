@@ -10,7 +10,7 @@ export const getPeople = (code) => {
     token: faker.internet.password(),
     name: faker.name.findName(),
     slug: slugGenerate(faker.name.findName()),
-    email: faker.internet.email(),
+    email: faker.internet.email().toLowerCase(),
     password: md5('123456'),
     cpf: faker.internet.password(),
     communityCode: code,

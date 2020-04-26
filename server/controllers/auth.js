@@ -62,7 +62,8 @@ export const login = async (req, res) => {
     doc.save()
     res.json({
       email: doc.email,
-      token
+      token,
+      entity
     })
   } catch (err) {
     return res.status(500).json({ message: 'Erro desconhecido ao logar', err })

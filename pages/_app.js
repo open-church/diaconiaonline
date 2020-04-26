@@ -1,6 +1,7 @@
 import React from 'react'
 
 import BootstrapProvider from '@bootstrap-styled/provider'
+import nextCookies from 'next-cookies'
 import App from 'next/app'
 import Head from 'next/head'
 
@@ -8,8 +9,17 @@ import { GlobalStyle } from '../styles/globalStyle'
 import { colors } from '../utils/variables'
 
 class MyApp extends App {
+  static async getInitialProps ({ Component, ctx }) {
+    const credentials = nextCookies(ctx).DO_CREDENTIALS || {}
+    let pageProps = {}
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+    return { pageProps, credentials, query: ctx.query }
+  }
+
   render () {
-    const { Component, pageProps } = this.props
+    const { Component, credentials, query, pageProps } = this.props
     return (
       <>
         <Head>
@@ -30,7 +40,7 @@ class MyApp extends App {
           '$btn-danger-border': `${colors.burningOrange}`
         }}>
           <GlobalStyle />
-          <Component {...pageProps} />
+          <Component credentials={credentials} query={query} {...pageProps} />
         </BootstrapProvider>
       </>
     )
