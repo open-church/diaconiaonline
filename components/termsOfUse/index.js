@@ -1,7 +1,9 @@
 import React from 'react'
 
+import { Wrapper } from './styles'
+
 const TermsOfUse = () => (
-  <>
+  <Wrapper>
     <h2>TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS PESSOAIS</h2>
     <p>Este documento visa registrar a manifestação livre, informada e inequívoca pela qual o Titular concorda com o tratamento de seus dados pessoais para finalidade específica, em conformidade com a Lei no 13.709 – Lei Geral de Proteção de Dados Pessoais (LGPD).</p>
     <p>Ao aderir o presente termo, o Titular consente e concorda que o projeto Diaconia Social, organizado e mantido por equipe voluntária, email diaconiaon@gmail.com, doravante denominado Controlador, tome decisões referentes ao tratamento de seus dados pessoais, bem como realize o tratamento de seus dados pessoais, envolvendo operações como as que se referem a coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, modificação, comunicação, transferência, difusão ou extração, com a finalidade de identificar e monitorar pessoas que necessitem de auxílio fornecido por entidades terceiras previamente cadastradas, doravante denominada Auxiliador, para que estas recebam ou continuem recebendo esse auxílio.</p>
@@ -52,7 +54,7 @@ const TermsOfUse = () => (
     <p>Este consentimento poderá ser revogado pelo Titular, a qualquer momento, mediante solicitação via e-mail ou correspondência ao Controlador.</p>
     <h3>Como reclamar</h3>
     <p>Se você tiver alguma dúvida sobre o uso de suas informações pessoais, entre em contato através do email diaconiaon@gmail.com</p>
-  </>
+  </Wrapper>
 )
 
 export default TermsOfUse
