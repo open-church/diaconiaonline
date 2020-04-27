@@ -33,7 +33,7 @@ function PeopleLogin (props) {
   }
 
   const goNextPage = (entity) => {
-    Router.push(entity === 'community' ? '/dashboard' : '/cadastro/pessoa')
+    Router.push(entity === 'community' ? '/dashboard' : '/cadastro/pessoa/index')
   }
 
   return (
@@ -68,7 +68,7 @@ function PeopleLogin (props) {
                       <Link href='/'><S.Forgot>Esqueci minha senha</S.Forgot></Link>
                       <S.ButtonsWrapper>
                         <E.CustomButton width="42%" type="submit" color="primary">Fazer login</E.CustomButton>
-                        <E.CustomButton tag={B.A} href="/cadastro/pessoa" width="54%" color="secondary">Cadastrar membro</E.CustomButton>
+                        <E.CustomButton tag={B.A} href="/cadastro/pessoa/index" width="54%" color="secondary">Cadastrar membro</E.CustomButton>
                       </S.ButtonsWrapper>
                     </Form>
                   )}

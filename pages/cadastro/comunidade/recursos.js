@@ -1,25 +1,56 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import * as B from '@bootstrap-styled/v4'
 import { Formik } from 'formik'
+import Router from 'next/router'
+import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
-import * as E from '../../components/elements/styles'
-import Layout from '../../components/layout'
-import * as S from '../../components/signupStyles/styles'
-import TermsOfUse from '../../components/termsOfUse'
-import { CommunityStockSchema } from '../../schemas/communityStock'
+import * as E from '../../../components/elements/styles'
+import Layout from '../../../components/layout'
+import * as S from '../../../components/signupStyles/styles'
+import TermsOfUse from '../../../components/termsOfUse'
+import { CommunityStockSchema } from '../../../schemas/communityStock'
+import Api from '../../../services/api'
 
-function CommunityStocks () {
+function CommunityStocks (props) {
+  const [loading, setLoading] = useState(true)
   const [accept, setAccpet] = useState(false)
   const [modal, setModal] = useState(false)
+  const [community, setCommunity] = useState(null)
+
+  useEffect(() => {
+    const { credentials } = props
+    const getCommunity = async () => {
+      const { data } = await Api.getCommunity()
+      setCommunity(data)
+      setLoading(false)
+    }
+    credentials && credentials.entity === 'community' ? getCommunity() : Router.push('/cadastro/comunidade/index')
+  }, [])
+
+  const updateCommunity = async (values) => {
+    try {
+      setLoading(true)
+      const { data } = await Api.updateCommunity(values)
+      // TODO data.message
+      setCommunity(data.community)
+      setTimeout(() => {
+        Router.push('/comunidade/perfil')
+      }, 5000)
+    } catch (err) {
+      // TODO err.message
+      console.log('err', err)
+      setLoading(false)
+    }
+  }
 
   const handleModal = () => {
     setModal(!modal)
   }
 
   return (
-    <Layout>
+    <Layout loading={loading}>
       <ThemeProvider theme={{ mode: 'community' }}>
         <S.PageContainer>
           <B.Row>
@@ -32,24 +63,21 @@ function CommunityStocks () {
                 <Formik
                   initialValues={{
                     stock: {
-                      money: '',
-                      basicBaskets: '',
-                      hygieneProducts: '',
-                      ppe: ''
+                      money: community && community.stock ? community.stock.money : '',
+                      basicBaskets: community && community.stock ? community.stock.basicBaskets : '',
+                      hygieneProducts: community && community.stock ? community.stock.hygieneProducts : '',
+                      ppe: community && community.stock ? community.stock.ppe : ''
                     },
                     financialDetails: {
-                      accountName: '',
-                      bank: '',
-                      agency: '',
-                      account: '',
-                      doc: ''
+                      accountName: community && community.financialDetails ? community.financialDetails.accountName : '',
+                      bank: community && community.financialDetails ? community.financialDetails.bank : '',
+                      agency: community && community.financialDetails ? community.financialDetails.agency : '',
+                      account: community && community.financialDetails ? community.financialDetails.account : '',
+                      doc: community && community.financialDetails ? community.financialDetails.doc : ''
                     }
                   }}
                   validationSchema={CommunityStockSchema}
-                  onSubmit={values => {
-                    // same shape as initial values
-                    console.log(values)
-                  }}
+                  onSubmit={updateCommunity}
                 >
                   {({ errors, touched }) => (
                     <S.CustomForm>
@@ -105,7 +133,7 @@ function CommunityStocks () {
                         Li e aceito os <S.TermsLink onClick={() => handleModal()}>Termos de Uso</S.TermsLink>
                       </S.CheckBoxLabel>
                       <S.ButtonsWrapper>
-                        <E.CustomButton color="danger">Voltar</E.CustomButton>
+                        <E.CustomButton tag={B.A} href="/cadastro/comunidade/index" color="danger">Voltar</E.CustomButton>
                         <E.CustomButton type="submit" color="info">Cadastrar</E.CustomButton>
                       </S.ButtonsWrapper>
                     </S.CustomForm>
@@ -124,6 +152,10 @@ function CommunityStocks () {
       </ThemeProvider>
     </Layout>
   )
+}
+
+CommunityStocks.propTypes = {
+  credentials: PropTypes.object
 }
 
 export default CommunityStocks

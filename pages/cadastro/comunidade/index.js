@@ -6,34 +6,40 @@ import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
+import { saveCredentials } from '../../../helpers/auth'
 import * as E from '../../components/elements/styles'
 import Layout from '../../components/layout'
 import * as S from '../../components/signupStyles/styles'
-import { UserRegisterSchema } from '../../schemas/userRegister'
+import { CommunityRegisterSchema } from '../../schemas/communityRegister'
 import Api from '../../services/api'
 
-function UserSignup (props) {
+function CommunitySignup (props) {
   const [loading, setLoading] = useState(true)
-  const [people, setPeople] = useState(null)
+  const [community, setCommunity] = useState(null)
 
   useEffect(() => {
     const { credentials } = props
-    const getPeople = async () => {
-      const { data } = await Api.getPeople()
-      setPeople(data)
+    const getCommunity = async () => {
+      const { data } = await Api.getCommunity()
+      setCommunity(data)
       setLoading(false)
     }
-    credentials && credentials.entity === 'people' ? getPeople() : setLoading(false)
+    credentials && credentials.entity === 'community' ? getCommunity() : setLoading(false)
   }, [])
 
-  const updatePeople = async (values) => {
+  const updateCommunity = async (values) => {
     try {
       setLoading(true)
-      const { data } = await (people ? Api.updatePeople(values) : Api.createPeople(values))
+      const { data } = await (community ? Api.updateCommunity(values) : Api.createCommunity(values))
       // TODO data.message
-      setPeople(data.people)
+      setCommunity(data.community)
+      await saveCredentials({
+        token: data.community.token,
+        email: data.community.email,
+        entity: 'community'
+      })
       setTimeout(() => {
-        Router.push('/login/pessoa')
+        Router.push('/cadastro/comunidade/recursos')
       }, 5000)
     } catch (err) {
       // TODO err.message
@@ -55,7 +61,7 @@ function UserSignup (props) {
 
   return (
     <Layout loading={loading}>
-      <ThemeProvider theme={{ mode: 'user' }}>
+      <ThemeProvider theme={{ mode: 'community' }}>
         <S.PageContainer>
           <B.Row>
             <S.BgCol lg="4" >
@@ -63,46 +69,40 @@ function UserSignup (props) {
             <B.Col lg="8" >
               <S.ContentWrapper>
                 <S.H3>Preencha seus dados</S.H3>
-                <S.P>Comece a preencher o seu cadastro em nossa plataforma nos informando os seus dados pessoais para criação da conta.</S.P>
+                <S.P>Comece a preencher o cadastro de sua comunidade em nossa plataforma indicando seus dados de registro.</S.P>
                 <Formik
                   initialValues={{
-                    name: people ? people.name : '',
-                    communityCode: people ? people.communityCode : '',
-                    cpf: people ? people.cpf : '',
-                    email: people ? people.email : '',
-                    emailConfirmation: people ? people.email : '',
-                    password: people ? people.password : '',
+                    name: community ? community.name : '',
+                    cnpj: community ? community.cnpj : '',
+                    email: community ? community.email : '',
+                    emailConfirmation: community ? community.email : '',
+                    password: community ? community.password : '',
                     passwordConfirmation: '',
                     address: {
-                      street: people && people.address ? people.address.street : '',
-                      complement: people && people.address ? people.address.complement : '',
-                      number: people && people.address ? people.address.number : '',
-                      neighborhood: people && people.address ? people.address.neighborhood : '',
-                      city: people && people.address ? people.address.city : '',
-                      state: people && people.address ? people.address.state : '',
-                      country: people && people.address ? people.address.country : '',
-                      zipCode: people && people.address ? people.address.zipCode : ''
+                      street: community && community.address ? community.address.street : '',
+                      complement: community && community.address ? community.address.complement : '',
+                      number: community && community.address ? community.address.number : '',
+                      neighborhood: community && community.address ? community.address.neighborhood : '',
+                      city: community && community.address ? community.address.city : '',
+                      state: community && community.address ? community.address.state : '',
+                      country: community && community.address ? community.address.country : '',
+                      zipCode: community && community.address ? community.address.zipCode : ''
                     }
                   }}
-                  validationSchema={UserRegisterSchema}
-                  onSubmit={updatePeople}
+                  validationSchema={CommunityRegisterSchema}
+                  onSubmit={updateCommunity}
                 >
-                  {({ errors, touched, values, setFieldValue }) => (
+                  {({ errors, touched, setFieldValue, values }) => (
                     <S.CustomForm>
                       <S.Label>
-                        <legend>Nome*</legend>
+                        <legend>Nome da instituição*</legend>
                         <S.CustomField name="name" placeholder="Insira o nome aqui" />
                         {errors.name && touched.name ? <S.Error>{errors.name}</S.Error> : null}
                       </S.Label>
-                      <S.Label width="33%">
-                        <legend>Código da Comunidade*</legend>
-                        <S.CustomField name="communityCode" placeholder="Insira o código da sua comunidade" />
-                        {errors.communityCode && touched.communityCode ? <S.Error>{errors.communityCode}</S.Error> : null}
-                      </S.Label>
-                      <S.Label width="33%">
-                        <legend>CPF</legend>
-                        <S.CustomField name="cpf" placeholder="Insira o CPF aqui" />
-                        {errors.cpf && touched.cpf ? <S.Error>{errors.cpf}</S.Error> : null}
+                      <S.Label width="67%">
+                        <legend>CNPJ</legend>
+                        <S.CustomField name="cnpj" placeholder="Insira o CNPJ aqui" />
+                        {errors.cnpj && touched.cnpj ? <S.Error>{errors.cnpj}</S.Error> : null}
                       </S.Label>
                       <S.Label width="33%">
                         <legend>CEP</legend>
@@ -119,7 +119,7 @@ function UserSignup (props) {
                       </S.Label>
                       <S.Label width="33%">
                         <legend>País</legend>
-                        <S.CustomField name="address.country" placeholder="Preencha CEP" disabled/>
+                        <S.CustomField name="address.country" placeholder="Preencha CEP" disabled />
                         {errors.country && touched.country ? <S.Error>{errors.country}</S.Error> : null}
                       </S.Label>
                       <S.Label width="33%">
@@ -142,12 +142,12 @@ function UserSignup (props) {
                         <S.CustomField name="address.neighborhood" placeholder="Preencha CEP" disabled />
                         {errors.neighborhood && touched.neighborhood ? <S.Error>{errors.neighborhood}</S.Error> : null}
                       </S.Label>
-                      <S.Label width="35%">
+                      <S.Label width="15%">
                         <legend>Número</legend>
                         <S.CustomField name="address.number" placeholder="Insira o número aqui" />
                         {errors.number && touched.complement ? <S.Error>{errors.complement}</S.Error> : null}
                       </S.Label>
-                      <S.Label width="65%">
+                      <S.Label width="85%">
                         <legend>Complemento</legend>
                         <S.CustomField name="address.complement" placeholder="Insira o complemento aqui" />
                         {errors.complement && touched.complement ? <S.Error>{errors.complement}</S.Error> : null}
@@ -177,8 +177,8 @@ function UserSignup (props) {
                         ) : null}
                       </S.Label>
                       <S.ButtonsWrapper>
-                        <E.CustomButton tag={B.A} href="/login/pessoa" color="secondary">Voltar</E.CustomButton>
-                        <E.CustomButton type="submit" color="primary">Continuar</E.CustomButton>
+                        <E.CustomButton tag={B.A} href="/login/comunidade" color="danger">Voltar</E.CustomButton>
+                        <E.CustomButton type="submit" color="info">Continuar</E.CustomButton>
                       </S.ButtonsWrapper>
                     </S.CustomForm>
                   )}
@@ -192,8 +192,8 @@ function UserSignup (props) {
   )
 }
 
-UserSignup.propTypes = {
+CommunitySignup.propTypes = {
   credentials: PropTypes.object
 }
 
-export default UserSignup
+export default CommunitySignup

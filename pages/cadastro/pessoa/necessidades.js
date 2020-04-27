@@ -1,25 +1,62 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import * as B from '@bootstrap-styled/v4'
 import { Formik } from 'formik'
+import Router from 'next/router'
+import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
-import * as E from '../../components/elements/styles'
-import Layout from '../../components/layout'
-import * as S from '../../components/signupStyles/styles'
-import TermsOfUse from '../../components/termsOfUse'
-import { CommunityStockSchema, RELATIONS, OCCUPATIONS, ESPECIALNEEDS } from '../../schemas/userNeeds'
+import * as E from '../../../components/elements/styles'
+import Layout from '../../../components/layout'
+import * as S from '../../../components/signupStyles/styles'
+import TermsOfUse from '../../../components/termsOfUse'
+import { CommunityStockSchema } from '../../../schemas/userNeeds'
+import Api from '../../../services/api'
 
-function UserResources () {
+function UserResources (props) {
   const [accept, setAccpet] = useState(false)
+  const [relations, setRelations] = useState([])
+  const [occupations, setOccupations] = useState([])
   const [modal, setModal] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [people, setPeople] = useState(null)
+
+  useEffect(() => {
+    const { credentials } = props
+    const getPeople = async () => {
+      const people = await Api.getPeople()
+      const occupations = await Api.getOccupations()
+      const relations = await Api.getCommunityRelations()
+      setPeople(people.data)
+      setOccupations(occupations.data)
+      setRelations(relations.data)
+      setLoading(false)
+    }
+    credentials && credentials.entity === 'people' ? getPeople() : setLoading(false)
+  }, [])
+
+  const updatePeople = async (values) => {
+    try {
+      setLoading(true)
+      const { data } = await Api.updatePeople({ ...values, accept })
+      // TODO data.message
+      setPeople(data.people)
+      setTimeout(() => {
+        Router.push('/login/pessoa')
+      }, 5000)
+    } catch (err) {
+      // TODO err.message
+      console.log('err', err)
+      setLoading(false)
+    }
+  }
 
   const handleModal = () => {
     setModal(!modal)
   }
 
   return (
-    <Layout>
+    <Layout loading={loading}>
       <ThemeProvider theme={{ mode: 'user' }}>
         <S.PageContainer>
           <B.Row>
@@ -31,23 +68,20 @@ function UserResources () {
                 <S.P>Informe qual é a sua comunidade, sua relação dentro dela e suas necessidades nesse momento.</S.P>
                 <Formik
                   initialValues={{
-                    occupation: '',
-                    communityRelation: '',
-                    urgencies: '',
+                    occupation: people ? people.occupation : '',
+                    communityRelation: people ? people.communityRelation : '',
+                    urgencies: people ? people.urgencies : '',
                     specialNeeds: {
-                      value: false,
-                      description: ''
+                      value: people && people.specialNeeds ? people.specialNeeds.value : '',
+                      description: people && people.specialNeeds ? people.specialNeeds.description : ''
                     },
                     controlledMedication: {
-                      value: false,
-                      description: ''
+                      value: people && people.controlledMedication ? people.controlledMedication.value : '',
+                      description: people && people.controlledMedication ? people.controlledMedication.description : ''
                     }
                   }}
                   validationSchema={CommunityStockSchema}
-                  onSubmit={values => {
-                    // same shape as initial values
-                    console.log(values)
-                  }}
+                  onSubmit={updatePeople}
                 >
                   {({ errors, touched, setFieldValue, values }) => (
                     <S.CustomForm>
@@ -57,8 +91,8 @@ function UserResources () {
                           name="communityRelation"
                           placeholder="Selecione..."
                           classNamePrefix="react-select"
-                          options={RELATIONS}
-                          value={RELATIONS.find(option => option.value === values.communityRelation)}
+                          options={relations}
+                          value={relations.find(option => option.value === values.communityRelation)}
                           onChange={(e, data) => setFieldValue(data.name, e.value)}
                         />
                         {errors.communityRelation && touched.communityRelation ? <S.Error>{errors.communityRelation}</S.Error> : null}
@@ -69,8 +103,8 @@ function UserResources () {
                           name="occupation"
                           placeholder="Selecione..."
                           classNamePrefix="react-select"
-                          options={OCCUPATIONS}
-                          value={OCCUPATIONS.find(option => option.value === values.occupation)}
+                          options={occupations}
+                          value={occupations.find(option => option.value === values.occupation)}
                           onChange={(e, data) => setFieldValue(data.name, e.value)}
                         />
                         {errors.occupation && touched.occupation ? <S.Error>{errors.occupation}</S.Error> : null}
@@ -89,16 +123,8 @@ function UserResources () {
                       </S.CustomFieldSet>
                       <S.Label width="60%">
                         <legend>Qual sua necessidade especial?</legend>
-                        <S.CustomSelect
-                          name="specialNeeds.description"
-                          placeholder="Selecione..."
-                          classNamePrefix="react-select"
-                          isDisabled={!values.specialNeeds.value}
-                          options={ESPECIALNEEDS}
-                          value={ESPECIALNEEDS.find(option => option.value === values.specialNeeds.description)}
-                          onChange={(e, data) => setFieldValue(data.name, e.value)}
-                        />
-                        {errors.occupation && touched.occupation ? <S.Error>{errors.occupation}</S.Error> : null}
+                        <S.CustomField disabled={!values.specialNeeds.value} name="specialNeeds.description" placeholder="Escreva aqui" />
+                        {errors.specialNeeds && touched.specialNeeds ? <S.Error>{errors.specialNeeds}</S.Error> : null}
                       </S.Label>
                       <S.CustomFieldSet width="40%">
                         <legend>Utiliza medicação controlada?</legend>
@@ -118,7 +144,7 @@ function UserResources () {
                         Li e aceito os <S.TermsLink onClick={() => handleModal()}>Termos de Uso</S.TermsLink>
                       </S.CheckBoxLabel>
                       <S.ButtonsWrapper>
-                        <E.CustomButton color="secondary">Voltar</E.CustomButton>
+                        <E.CustomButton tag={B.A} href="/cadastro/pessoa/index" color="secondary">Voltar</E.CustomButton>
                         <E.CustomButton type="submit" color="primary">Cadastrar</E.CustomButton>
                       </S.ButtonsWrapper>
                     </S.CustomForm>
@@ -137,6 +163,10 @@ function UserResources () {
       </ThemeProvider>
     </Layout>
   )
+}
+
+UserResources.propTypes = {
+  credentials: PropTypes.object
 }
 
 export default UserResources

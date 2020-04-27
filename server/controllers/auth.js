@@ -4,7 +4,7 @@ import md5 from 'md5'
 import Community from '../models/community'
 import People from '../models/people'
 
-const createToken = auth => {
+export const createToken = auth => {
   return jwt.sign(
     { id: auth.id },
     process.env.SECRET_KEY,

@@ -15,7 +15,7 @@ api.interceptors.response.use(response => response,
 )
 
 class Api {
-  setHeader (token, visitParams) {
+  setHeader (token) {
     api.defaults.headers.common = {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -23,75 +23,51 @@ class Api {
   }
 
   async login (user) {
-    try {
-      return await api.post('/auth', user)
-    } catch (error) {
-      return error
-    }
+    return api.post('/auth', user).then(response => response).catch(error => error)
   }
 
   async createCommunity (community) {
-    try {
-      return await api.post('/community', community)
-    } catch (error) {
-      return error
-    }
+    return api.post('/community', community).then(response => response).catch(error => error)
   }
 
-  async createPeople (community) {
-    try {
-      return await api.post('/people', community)
-    } catch (error) {
-      return error
-    }
+  async createPeople (people) {
+    return api.post('/people', people).then(response => response).catch(error => error)
   }
 
   async updateCommunity (community) {
-    try {
-      const credentials = getCredentials()
-      this.setHeader(credentials.token)
-      return await api.put('/community', community)
-    } catch (error) {
-      return error
-    }
+    const credentials = getCredentials()
+    this.setHeader(credentials.token)
+    return api.put('/community', community).then(response => response).catch(error => error)
   }
 
   async updatePeople (people) {
-    try {
-      const credentials = getCredentials()
-      this.setHeader(credentials.token)
-      return await api.put('/people', people)
-    } catch (error) {
-      return error
-    }
+    const credentials = getCredentials()
+    this.setHeader(credentials.token)
+    return api.put('/people', people).then(response => response).catch(error => error)
   }
 
   async getCommunity () {
-    try {
-      const credentials = getCredentials()
-      this.setHeader(credentials.token)
-      return await api.get('/community')
-    } catch (error) {
-      return error
-    }
+    const credentials = getCredentials()
+    this.setHeader(credentials.token)
+    return api.get('/community').then(response => response).catch(error => error)
   }
 
   async getPeople () {
-    try {
-      const credentials = getCredentials()
-      this.setHeader(credentials.token)
-      return await api.get('/people')
-    } catch (error) {
-      return error
-    }
+    const credentials = getCredentials()
+    this.setHeader(credentials.token)
+    return api.get('/people').then(response => response).catch(error => error)
   }
 
   async getAddressByZipCode (zipCode) {
-    try {
-      return await api.get(`/utils/cep/${zipCode}`)
-    } catch (error) {
-      return error
-    }
+    return api.get(`/utils/cep/${zipCode}`).then(response => response).catch(error => error)
+  }
+
+  async getOccupations () {
+    return api.get('/utils/occupations').then(response => response).catch(error => error)
+  }
+
+  async getCommunityRelations () {
+    return api.get('/utils/community-relations').then(response => response).catch(error => error)
   }
 }
 

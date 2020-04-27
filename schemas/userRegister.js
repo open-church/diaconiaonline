@@ -4,6 +4,7 @@ export const UserRegisterSchema = Yup.object().shape({
   name: Yup.string()
     .required('Digite o nome da instituição'),
   cpf: Yup.string(),
+  communityCode: Yup.string().required('Digite o código da sua comunidade'),
   email: Yup.string()
     .email('Formato de email inválido')
     .required('Digite seu email'),

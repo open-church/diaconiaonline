@@ -48,6 +48,9 @@ const peopleSchema = new mongoose.Schema({
   urgencies: {
     type: String
   },
+  accept: {
+    type: Boolean
+  },
   phone: String,
   address: {
     street: String,

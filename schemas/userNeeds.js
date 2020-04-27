@@ -13,19 +13,3 @@ export const CommunityStockSchema = Yup.object().shape({
     description: Yup.string()
   })
 })
-
-export const OCCUPATIONS = [
-  { value: 'employed', label: 'Empregado' },
-  { value: 'unemployed', label: 'Desempregado' },
-  { value: 'retired', label: 'Aposentado' }
-]
-
-export const RELATIONS = [
-  { value: 'member', label: 'Membro' },
-  { value: 'visitor', label: 'Visitante' }
-]
-
-export const ESPECIALNEEDS = [
-  { value: 'cego', label: 'Cego' },
-  { value: 'cadeirante', label: 'Cadeirante' }
-]

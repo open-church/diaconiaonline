@@ -4,6 +4,7 @@ import { slugGenerate } from '../helpers/functions'
 import invalid from '../helpers/validators'
 import Community from '../models/community'
 import People from '../models/people'
+import { createToken } from './auth'
 
 export const getPeople = async (req, res) => {
   try {
@@ -20,7 +21,7 @@ export const createPeople = async (req, res) => {
   try {
     const {
       name, cpf, email, password, communityCode,
-      occupation, communityRelation, address
+      occupation, communityRelation, address, accept
     } = req.body
 
     const community = await Community.findOne({ code: communityCode })
@@ -32,11 +33,15 @@ export const createPeople = async (req, res) => {
       }, async (err, people) => {
         if (err) throw err
         try {
+          if (!accept) return res.status(400).json({ message: 'Termos de uso precisam ser aceitos' })
           if (people) return res.status(400).json({ message: 'Pessoa já cadastrada' })
           if (invalid.email(email)) return res.status(400).json({ message: 'Email inválido' })
           if (invalid.peopleCPF(cpf)) return res.status(400).json({ message: 'CPF inválido' })
           if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
+          const token = createToken({ id: md5(new Date()) })
           const newPeople = await new People({
+            accept,
+            token,
             name,
             communityCode,
             slug: slugGenerate(name),
@@ -48,7 +53,7 @@ export const createPeople = async (req, res) => {
             address
           }).save()
           if (newPeople) {
-            return res.json({ message: 'Pessoa cadastrada', community: { ...newPeople._doc } })
+            return res.json({ message: 'Pessoa cadastrada', people: { ...newPeople._doc } })
           } else {
             throw new Error(err)
           }
@@ -66,7 +71,7 @@ export const updatePeople = async (req, res) => {
   try {
     const { _id } = req.people
     const {
-      name, cpf, newEmail,
+      name, cpf, newEmail, accept,
       occupation, communityRelation, address,
       specialNeeds, controlledMedication, urgencies, phone
     } = req.body
@@ -76,12 +81,12 @@ export const updatePeople = async (req, res) => {
         _id
       }, async (err, people) => {
         if (err) throw err
+        if (!accept) return res.status(400).json({ message: 'Termos de uso precisam ser aceitos' })
         if (!people) return res.status(404).json({ message: 'Pessoa não cadastrada' })
         if (newEmail && invalid.email(newEmail)) return res.status(400).json({ message: 'Email inválido' })
         if (invalid.peopleCPF(cpf)) return res.status(400).json({ message: 'CPF inválido' })
         if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
-        if (invalid.required(communityRelation)) return res.status(400).json({ message: 'Relação com a comunidade inválida' })
-        if (invalid.required(occupation)) return res.status(400).json({ message: 'Ocupação inválida' })
+        people.accept = accept || people.accept
         people.name = name || people.name
         people.cnpj = cpf || people.cpf
         people.slug = slugGenerate(people.name)
