@@ -12,7 +12,7 @@ import * as S from '../../../components/signupStyles/styles'
 function CommunityLogin (props) {
   return (
     <Layout>
-      <ThemeProvider theme={{ mode: 'community' }}>
+      <ThemeProvider theme={{ mode: 'user' }}>
         <Flex.PageContainer fluid>
           <B.Row>
             <Flex.BgCol lg="5" xl="7">
@@ -20,12 +20,11 @@ function CommunityLogin (props) {
             <B.Col lg="7" xl="5">
               <S.ContentWrapper>
                 <S.H3>Cadastro concluído!</S.H3>
-                <S.P>Sua comunidade está registrada em nosso sistema. Agora você pode receber todos os dados de usuários participantes de sua igreja para poder compartilhar recursos.</S.P>
-                <S.P>Para compartilhar o perfil de registro de sua comunidade, utilize o código:</S.P>
-                <S.Code>351615</S.Code>
+                <S.P>Agora sua comunidade está com o seu registro em mãos. Em breve você receberá um contato dos responsáveis por sua igreja para discutir os próximos passos para as suas necessidades.</S.P>
+                <S.P>Se precisar editar ou atualizar os dados de seu cadastro, basta fazer o login através do botão indicado.</S.P>
                 <S.ButtonsWrapper>
-                  <E.CustomButton tag={B.A} href="/login/comunidade" color="info">Fazer login</E.CustomButton>
-                  <E.CustomButton tag={B.A} href="/" color="danger">Página Inicial</E.CustomButton>
+                  <E.CustomButton tag={B.A} href="/login/pessoa" color="primary">Fazer login</E.CustomButton>
+                  <E.CustomButton tag={B.A} href="/" color="secondary">Página Inicial</E.CustomButton>
                 </S.ButtonsWrapper>
               </S.ContentWrapper>
             </B.Col>

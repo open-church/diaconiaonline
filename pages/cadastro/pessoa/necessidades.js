@@ -42,7 +42,7 @@ function UserResources (props) {
       // TODO data.message
       setPeople(data.people)
       setTimeout(() => {
-        Router.push('/login/pessoa')
+        Router.push('/cadastro/pessoa/sucesso')
       }, 5000)
     } catch (err) {
       // TODO err.message

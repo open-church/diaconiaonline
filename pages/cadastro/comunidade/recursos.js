@@ -36,7 +36,7 @@ function CommunityStocks (props) {
       // TODO data.message
       setCommunity(data.community)
       setTimeout(() => {
-        Router.push('/comunidade/sucesso')
+        Router.push('/cadastro/comunidade/sucesso')
       }, 5000)
     } catch (err) {
       // TODO err.message
