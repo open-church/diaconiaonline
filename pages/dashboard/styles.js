@@ -43,11 +43,15 @@ export const UserBox = styled(CustomContainer)`
   margin-bottom: 80px;
   
   & .col {
-    padding: 15px;
+    padding: 30px;
   }
 
   @media (max-width: 768px) {
     width: calc(100% - 30px);
+
+    & .col {
+      padding: 15px;
+    }
   }
 `
 
