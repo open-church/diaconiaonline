@@ -6,12 +6,12 @@ import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
+import * as E from '../../../components/elements/styles'
+import Layout from '../../../components/layout'
+import * as S from '../../../components/signupStyles/styles'
 import { saveCredentials } from '../../../helpers/auth'
-import * as E from '../../components/elements/styles'
-import Layout from '../../components/layout'
-import * as S from '../../components/signupStyles/styles'
-import { CommunityRegisterSchema } from '../../schemas/communityRegister'
-import Api from '../../services/api'
+import { CommunityRegisterSchema } from '../../../schemas/communityRegister'
+import Api from '../../../services/api'
 
 function CommunitySignup (props) {
   const [loading, setLoading] = useState(true)
