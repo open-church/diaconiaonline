@@ -76,7 +76,7 @@ function UserSignup (props) {
   }
 
   return (
-    <Layout loading={loading}>
+    <Layout loading={loading} navLight>
       <ThemeProvider theme={{ mode: 'user' }}>
         <S.PageContainer>
           <B.Row>

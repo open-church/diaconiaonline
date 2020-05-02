@@ -9,14 +9,17 @@ import {
   Nav,
   NavItem
 } from '@bootstrap-styled/v4'
+import PropTypes from 'prop-types'
 
 import { logout } from '../../helpers/auth'
 import * as S from './styles'
 
-function Navbar () {
+function Navbar ({ light }) {
   const [open, setOpen] = useState(false)
+  console.log('light', light)
+
   return (
-    <S.Navbar fixed="top" toggleable="lg" className={open ? 'open' : ''}>
+    <S.Navbar light={light} fixed="top" toggleable="lg" className={open ? 'open' : ''}>
       <Container>
         <div className="d-flex justify-content-between">
           <NavbarBrand tag={A} href="/" title="Acessar página inicial">
@@ -40,6 +43,10 @@ function Navbar () {
       </Container>
     </S.Navbar>
   )
+}
+
+Navbar.propTypes = {
+  light: PropTypes.bool
 }
 
 export default Navbar
