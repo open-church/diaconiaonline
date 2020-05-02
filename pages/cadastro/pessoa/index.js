@@ -6,42 +6,51 @@ import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
-import Alert from '../../components/alert'
-import * as E from '../../components/elements/styles'
-import Layout from '../../components/layout'
-import * as S from '../../components/signupStyles/styles'
-import TermsOfUse from '../../components/termsOfUse'
-import { saveCredentials } from '../../helpers/auth'
-import { CommunityRegisterSchema } from '../../schemas/communityRegister'
-import Api from '../../services/api'
+import Alert from '../../../components/alert'
+import * as E from '../../../components/elements/styles'
+import Layout from '../../../components/layout'
+import * as S from '../../../components/signupStyles/styles'
+import TermsOfUse from '../../../components/termsOfUse'
+import { saveCredentials } from '../../../helpers/auth'
+import { UserRegisterSchema } from '../../../schemas/userRegister'
+import Api from '../../../services/api'
 
-function CommunitySignup (props) {
+function UserSignup (props) {
+  const [relations, setRelations] = useState([])
+  const [occupations, setOccupations] = useState([])
   const [loading, setLoading] = useState(true)
-  const [step, setStep] = useState(1)
-  const [modal, setModal] = useState(false)
   const [feedbackMessage, setFeedbackMessage] = useState({ show: false, message: '' })
+  const [modal, setModal] = useState(false)
+  const [step, setStep] = useState(1)
 
   useEffect(() => {
     const { credentials } = props
+    const getList = async () => {
+      const occupations = await Api.getOccupations()
+      const relations = await Api.getCommunityRelations()
+      setOccupations(occupations.data)
+      setRelations(relations.data)
+    }
     if (credentials && credentials.entity) {
       credentials.entity === 'people' && Router.push('/atualizar/pessoa')
       credentials.entity === 'community' && Router.push('/atualizar/comunidade')
     } else {
       setLoading(false)
+      getList()
     }
   }, [])
 
   const onSubmit = async (values) => {
     try {
       setLoading(true)
-      const { data } = await Api.createCommunity(values)
-      if (!data.community) throw new Error(data.message)
+      const { data } = await Api.createPeople(values)
+      if (!data.people) throw new Error(data.message)
       await saveCredentials({
-        token: data.community.token,
-        email: data.community.email,
-        entity: 'community'
+        token: data.people.token,
+        email: data.people.email,
+        entity: 'people'
       })
-      Router.push('/login/comunidade')
+      Router.push('/login/pessoa')
     } catch (err) {
       setStep(1)
       window.scrollTo(0, 0)
@@ -68,7 +77,7 @@ function CommunitySignup (props) {
 
   return (
     <Layout loading={loading}>
-      <ThemeProvider theme={{ mode: 'community' }}>
+      <ThemeProvider theme={{ mode: 'user' }}>
         <S.PageContainer>
           <B.Row>
             <S.BgCol lg="4" >
@@ -76,15 +85,16 @@ function CommunitySignup (props) {
             <B.Col lg="8" >
               <S.ContentWrapper>
                 <S.H3>Preencha seus dados</S.H3>
-                <S.P>Comece a preencher o cadastro de sua comunidade em nossa plataforma indicando seus dados de registro.</S.P>
+                <S.P>Comece a preencher o seu cadastro em nossa plataforma nos informando os seus dados pessoais para criação da conta.</S.P>
                 {feedbackMessage.show && <Alert message={feedbackMessage.message} type="error" />}
                 <Formik
                   initialValues={{
                     name: '',
-                    accept: false,
-                    cnpj: '',
+                    communityCode: '',
+                    cpf: '',
                     email: '',
                     emailConfirmation: '',
+                    accept: false,
                     password: '',
                     passwordConfirmation: '',
                     address: {
@@ -97,35 +107,38 @@ function CommunitySignup (props) {
                       country: '',
                       zipCode: ''
                     },
-                    stock: {
-                      money: '',
-                      basicBaskets: '',
-                      hygieneProducts: '',
-                      ppe: ''
+                    occupation: '',
+                    communityRelation: '',
+                    urgencies: '',
+                    specialNeeds: {
+                      value: false,
+                      description: ''
                     },
-                    financialDetails: {
-                      accountName: '',
-                      bank: '',
-                      agency: '',
-                      account: '',
-                      doc: ''
+                    controlledMedication: {
+                      value: false,
+                      description: ''
                     }
                   }}
-                  validationSchema={CommunityRegisterSchema}
+                  validationSchema={UserRegisterSchema}
                   onSubmit={onSubmit}
                 >
-                  {({ errors, touched, setFieldValue, values }) => (
+                  {({ errors, touched, values, setFieldValue, setErrors }) => (
                     <>
                       <S.CustomForm hide={step !== 1}>
                         <S.Label>
-                          <legend>Nome da instituição*</legend>
+                          <legend>Nome*</legend>
                           <S.CustomField name="name" placeholder="Insira o nome aqui" />
                           {errors.name && touched.name ? <S.Error>{errors.name}</S.Error> : null}
                         </S.Label>
-                        <S.Label width="67%">
-                          <legend>CNPJ</legend>
-                          <S.CustomField name="cnpj" placeholder="Insira o CNPJ aqui" />
-                          {errors.cnpj && touched.cnpj ? <S.Error>{errors.cnpj}</S.Error> : null}
+                        <S.Label width="33%">
+                          <legend>Código da Comunidade*</legend>
+                          <S.CustomField name="communityCode" placeholder="Insira o código da sua comunidade" />
+                          {errors.communityCode && touched.communityCode ? <S.Error>{errors.communityCode}</S.Error> : null}
+                        </S.Label>
+                        <S.Label width="33%">
+                          <legend>CPF</legend>
+                          <S.CustomField name="cpf" placeholder="Insira o CPF aqui" />
+                          {errors.cpf && touched.cpf ? <S.Error>{errors.cpf}</S.Error> : null}
                         </S.Label>
                         <S.Label width="33%">
                           <legend>CEP</legend>
@@ -142,7 +155,7 @@ function CommunitySignup (props) {
                         </S.Label>
                         <S.Label width="33%">
                           <legend>País</legend>
-                          <S.CustomField name="address.country" placeholder="Preencha CEP" disabled />
+                          <S.CustomField name="address.country" placeholder="Preencha CEP" disabled/>
                           {errors.country && touched.country ? <S.Error>{errors.country}</S.Error> : null}
                         </S.Label>
                         <S.Label width="33%">
@@ -165,12 +178,12 @@ function CommunitySignup (props) {
                           <S.CustomField name="address.neighborhood" placeholder="Preencha CEP" disabled />
                           {errors.neighborhood && touched.neighborhood ? <S.Error>{errors.neighborhood}</S.Error> : null}
                         </S.Label>
-                        <S.Label width="15%">
+                        <S.Label width="35%">
                           <legend>Número</legend>
                           <S.CustomField name="address.number" placeholder="Insira o número aqui" />
                           {errors.number && touched.complement ? <S.Error>{errors.complement}</S.Error> : null}
                         </S.Label>
-                        <S.Label width="85%">
+                        <S.Label width="65%">
                           <legend>Complemento</legend>
                           <S.CustomField name="address.complement" placeholder="Insira o complemento aqui" />
                           {errors.complement && touched.complement ? <S.Error>{errors.complement}</S.Error> : null}
@@ -200,56 +213,69 @@ function CommunitySignup (props) {
                           ) : null}
                         </S.Label>
                         <S.ButtonsWrapper>
-                          <E.CustomButton tag={B.A} href="/login/comunidade" color="danger">Voltar</E.CustomButton>
+                          <E.CustomButton tag={B.A} href="/login/pessoa" color="secondary">Voltar</E.CustomButton>
                           <E.CustomButton type="button" onClick={() => setStep(2)} disabled={Object.values(errors).length > 0} color="primary">Continuar</E.CustomButton>
                         </S.ButtonsWrapper>
                       </S.CustomForm>
                       <S.CustomForm hide={step !== 2}>
                         <S.Label width="50%">
-                          <legend>Dinheiro para ajuda</legend>
-                          <S.CustomField name="stock.money" placeholder="Insira o nome aqui" />
-                          {errors.money && touched.money ? <S.Error>{errors.money}</S.Error> : null}
+                          <legend>Posição na comunidade</legend>
+                          <S.CustomSelect
+                            name="communityRelation"
+                            placeholder="Selecione..."
+                            classNamePrefix="react-select"
+                            options={relations}
+                            value={relations.find(option => option.value === values.communityRelation)}
+                            onChange={(e, data) => setFieldValue(data.name, e.value)}
+                          />
+                          {errors.communityRelation && touched.communityRelation ? <S.Error>{errors.communityRelation}</S.Error> : null}
                         </S.Label>
                         <S.Label width="50%">
-                          <legend>Cestas básicas disponíveis</legend>
-                          <S.CustomField name="stock.basicBaskets" placeholder="Insira o nome aqui" />
-                          {errors.basicBaskets && touched.basicBaskets ? <S.Error>{errors.basicBaskets}</S.Error> : null}
+                          <legend>Ocupação atual</legend>
+                          <S.CustomSelect
+                            name="occupation"
+                            placeholder="Selecione..."
+                            classNamePrefix="react-select"
+                            options={occupations}
+                            value={occupations.find(option => option.value === values.occupation)}
+                            onChange={(e, data) => setFieldValue(data.name, e.value)}
+                          />
+                          {errors.occupation && touched.occupation ? <S.Error>{errors.occupation}</S.Error> : null}
                         </S.Label>
-                        <S.Label width="50%">
-                          <legend>Kits de higiene disponíveis</legend>
-                          <S.CustomField name="stock.hygieneProducts" placeholder="Insira o nome aqui" />
-                          {errors.hygieneProducts && touched.hygieneProducts ? <S.Error>{errors.hygieneProducts}</S.Error> : null}
+                        <S.Label>
+                          <legend>Nos diga se você tem urgência em algum mantimento:</legend>
+                          <S.CustomField name="urgencies" placeholder="Escreva aqui" />
+                          {errors.urgencies && touched.urgencies ? <S.Error>{errors.urgencies}</S.Error> : null}
                         </S.Label>
-                        <S.Label width="50%">
-                          <legend>EPIs disponíveis</legend>
-                          <S.CustomField name="stock.ppe" placeholder="Insira o nome aqui" />
-                          {errors.ppe && touched.ppe ? <S.Error>{errors.ppe}</S.Error> : null}
+                        <S.CustomFieldSet width="40%">
+                          <legend>Portador de necessidades especiais?</legend>
+                          <div>
+                            <label><input type="radio" value="true" checked={values.specialNeeds.value} name="specialNeeds.value" onChange={() => setFieldValue('specialNeeds.value', true)}/> Sim</label>
+                            <label><input type="radio" value="false" checked={!values.specialNeeds.value} name="specialNeeds.value" onChange={() => {
+                              setFieldValue('specialNeeds.value', false)
+                              setFieldValue('specialNeeds.description', '')
+                            }}/> Não</label>
+                          </div>
+                        </S.CustomFieldSet>
+                        <S.Label width="60%">
+                          <legend>Qual sua necessidade especial?</legend>
+                          <S.CustomField disabled={!values.specialNeeds.value} name="specialNeeds.description" placeholder="Escreva aqui" />
+                          {errors.specialNeeds && touched.specialNeeds ? <S.Error>{errors.specialNeeds}</S.Error> : null}
                         </S.Label>
-                        <S.H4>Dados bancários da instituição</S.H4>
-                        <S.Label width="50%">
-                          <legend>Agência</legend>
-                          <S.CustomField name="financialDetails.agency" placeholder="Insira o nome aqui" />
-                          {errors.agency && touched.agency ? <S.Error>{errors.agency}</S.Error> : null}
-                        </S.Label>
-                        <S.Label width="50%">
-                          <legend>Conta</legend>
-                          <S.CustomField name="financialDetails.account" placeholder="Insira o nome aqui" />
-                          {errors.account && touched.account ? <S.Error>{errors.account}</S.Error> : null}
-                        </S.Label>
-                        <S.Label width="50%">
-                          <legend>Banco</legend>
-                          <S.CustomField name="financialDetails.bank" placeholder="Insira o nome aqui" />
-                          {errors.bank && touched.bank ? <S.Error>{errors.bank}</S.Error> : null}
-                        </S.Label>
-                        <S.Label width="50%">
-                          <legend>CNPJ</legend>
-                          <S.CustomField name="financialDetails.doc" placeholder="Insira o nome aqui" />
-                          {errors.doc && touched.doc ? <S.Error>{errors.doc}</S.Error> : null}
-                        </S.Label>
-                        <S.Label width="100%">
-                          <legend>Titular</legend>
-                          <S.CustomField name="financialDetails.accountName" placeholder="Insira o nome aqui" />
-                          {errors.accountName && touched.accountName ? <S.Error>{errors.accountName}</S.Error> : null}
+                        <S.CustomFieldSet width="40%">
+                          <legend>Utiliza medicação controlada?</legend>
+                          <div>
+                            <label><input type="radio" value="true" checked={values.controlledMedication.value} name="controlledMedication.value" onChange={() => setFieldValue('controlledMedication.value', true)}/> Sim</label>
+                            <label><input type="radio" value="true" checked={!values.controlledMedication.value} name="controlledMedication.value" onChange={() => {
+                              setFieldValue('controlledMedication.value', false)
+                              setFieldValue('controlledMedication.description', '')
+                            }}/> Não</label>
+                          </div>
+                        </S.CustomFieldSet>
+                        <S.Label width="60%">
+                          <legend>Diga-nos o nome da medicação:</legend>
+                          <S.CustomField disabled={!values.controlledMedication.value} name="controlledMedication.description" placeholder="Escreva aqui" />
+                          {errors.description && touched.description ? <S.Error>{errors.description}</S.Error> : null}
                         </S.Label>
                         <S.CheckBoxLabel>
                           <S.CustomCheckbox name="accept" checked={values.accept} onChange={() => setFieldValue('accept', !values.accept)}/>
@@ -279,8 +305,8 @@ function CommunitySignup (props) {
   )
 }
 
-CommunitySignup.propTypes = {
+UserSignup.propTypes = {
   credentials: PropTypes.object
 }
 
-export default CommunitySignup
+export default UserSignup
