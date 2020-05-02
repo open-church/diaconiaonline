@@ -52,6 +52,12 @@ class Api {
     return api.get('/community').then(response => response).catch(error => error)
   }
 
+  async getMyMembers () {
+    const credentials = getCredentials()
+    this.setHeader(credentials.token)
+    return api.get('/community/members').then(response => response).catch(error => error)
+  }
+
   async getPeople () {
     const credentials = getCredentials()
     this.setHeader(credentials.token)

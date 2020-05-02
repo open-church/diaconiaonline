@@ -19,21 +19,22 @@ function CommunityLogin (props) {
 
   useEffect(() => {
     const { credentials } = props
-    credentials && credentials.token ? goNextPage(credentials.entity) : setLoading(false)
+    if (credentials && credentials.entity) {
+      credentials.entity === 'people' && Router.push('/dashboard/pessoa')
+      credentials.entity === 'community' && Router.push('/dashboard/comunidade')
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const login = async values => {
     try {
       const { data } = await Api.login({ ...values, entity: 'community' })
       await saveCredentials({ ...data })
-      goNextPage(data.entity)
+      Router.push('/dashboard/comunidade')
     } catch (err) {
       console.log('err', err)
     }
-  }
-
-  const goNextPage = (entity) => {
-    Router.push(entity === 'community' ? '/dashboard' : '/cadastro/pessoa')
   }
 
   return (

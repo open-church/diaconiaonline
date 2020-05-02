@@ -298,6 +298,7 @@ export const CardPhone = styled.p`
 `
 
 export const CardHighlight = styled.div`
+  display: flex;
   margin-bottom: 10px;
 `
 
