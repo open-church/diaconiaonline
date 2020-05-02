@@ -9,7 +9,7 @@ import Layout from '../../../components/layout'
 import * as Flex from '../../../components/loginStyles/styles'
 import * as S from '../../../components/signupStyles/styles'
 
-function CommunityLogin (props) {
+function PeopleSuccess (props) {
   return (
     <Layout>
       <ThemeProvider theme={{ mode: 'user' }}>
@@ -20,7 +20,7 @@ function CommunityLogin (props) {
             <B.Col lg="7" xl="5">
               <S.ContentWrapper>
                 <S.H3>Cadastro concluído!</S.H3>
-                <S.P>Agora sua comunidade está com o seu registro em mãos. Em breve você receberá um contato dos responsáveis por sua igreja para discutir os próximos passos para as suas necessidades.</S.P>
+                <S.P>Agora sua comunidade está com o seu registro em mãos. Em breve você receberá um contato dos responsáveis por sua comunidade para discutir os próximos passos para as suas necessidades.</S.P>
                 <S.P>Se precisar editar ou atualizar os dados de seu cadastro, basta fazer o login através do botão indicado.</S.P>
                 <S.ButtonsWrapper>
                   <E.CustomButton tag={B.A} href="/login/pessoa" color="primary">Fazer login</E.CustomButton>
@@ -35,8 +35,8 @@ function CommunityLogin (props) {
   )
 }
 
-CommunityLogin.propTypes = {
+PeopleSuccess.propTypes = {
   credentials: PropTypes.object
 }
 
-export default CommunityLogin
+export default PeopleSuccess

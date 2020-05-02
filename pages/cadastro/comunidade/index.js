@@ -41,7 +41,7 @@ function CommunitySignup (props) {
         email: data.community.email,
         entity: 'community'
       })
-      Router.push('/login/comunidade')
+      Router.push('/cadastro/comunidade/sucesso')
     } catch (err) {
       setStep(1)
       window.scrollTo(0, 0)

@@ -50,7 +50,7 @@ function UserSignup (props) {
         email: data.people.email,
         entity: 'people'
       })
-      Router.push('/login/pessoa')
+      Router.push('/cadastro/pessoa/sucesso')
     } catch (err) {
       setStep(1)
       window.scrollTo(0, 0)
