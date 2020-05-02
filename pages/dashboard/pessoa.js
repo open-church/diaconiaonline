@@ -19,7 +19,9 @@ function UserDashboard (props) {
       setPeople(data)
       setLoading(false)
     }
-    credentials && credentials.entity === 'people' ? getPeople() : Router.push('/dashboard/comunidade')
+    if (!credentials || !credentials.entity) return Router.push('/login/pessoa')
+    credentials.entity === 'people' && getPeople()
+    credentials.entity === 'community' && Router.push('/dashboard/comunidade')
   }, [])
 
   const check = (field) => field && field.length > 0
