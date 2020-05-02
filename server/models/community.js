@@ -41,13 +41,13 @@ const communitySchema = new mongoose.Schema({
     doc: String
   },
   address: {
-    street: String,
-    complement: String,
-    number: String,
-    neighborhood: String,
     city: String,
-    state: String,
+    complement: String,
     country: String,
+    neighborhood: String,
+    number: String,
+    state: String,
+    street: String,
     zipCode: Number
   }
 },

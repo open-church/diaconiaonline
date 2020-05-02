@@ -33,7 +33,7 @@ function PeopleLogin (props) {
   }
 
   const goNextPage = (entity) => {
-    Router.push(entity === 'community' ? '/dashboard' : '/cadastro/pessoa')
+    Router.push(entity === 'community' ? '/login/comunidade' : '/dashboard/pessoa')
   }
 
   return (

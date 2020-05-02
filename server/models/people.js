@@ -53,12 +53,13 @@ const peopleSchema = new mongoose.Schema({
   },
   phone: String,
   address: {
-    street: String,
+    city: String,
     complement: String,
-    number: String,
-    neighborhood: String,
-    state: String,
     country: String,
+    neighborhood: String,
+    number: String,
+    state: String,
+    street: String,
     zipCode: String
   }
 },
