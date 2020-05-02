@@ -10,12 +10,14 @@ import { ThemeProvider } from 'styled-components'
 import * as E from '../../components/elements/styles'
 import Layout from '../../components/layout'
 import * as S from '../../components/loginStyles/styles'
+import { useDispatchSession } from '../../components/state/session'
 import { saveCredentials } from '../../helpers/auth'
 import { LoginSchema } from '../../schemas/login'
 import Api from '../../services/api'
 
 function PeopleLogin (props) {
   const [loading, setLoading] = useState(true)
+  const dispatch = useDispatchSession()
 
   useEffect(() => {
     const { credentials } = props
@@ -31,6 +33,10 @@ function PeopleLogin (props) {
     try {
       const { data } = await Api.login({ ...values, entity: 'people' })
       await saveCredentials({ ...data })
+      dispatch({
+        type: 'UPDATE',
+        payload: data
+      })
       Router.push('/dashboard/pessoa')
     } catch (err) {
       console.log('err', err)

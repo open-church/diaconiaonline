@@ -5,6 +5,7 @@ import nextCookies from 'next-cookies'
 import App from 'next/app'
 import Head from 'next/head'
 
+import { SessionProvider } from '../components/state/session'
 import { GlobalStyle } from '../styles/globalStyle'
 import { colors } from '../utils/variables'
 
@@ -40,7 +41,9 @@ class MyApp extends App {
           '$btn-danger-border': `${colors.burningOrange}`
         }}>
           <GlobalStyle />
-          <Component credentials={credentials} query={query} {...pageProps} />
+          <SessionProvider>
+            <Component credentials={credentials} query={query} {...pageProps} />
+          </SessionProvider>
         </BootstrapProvider>
       </>
     )
