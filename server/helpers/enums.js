@@ -1,89 +1,89 @@
 export const communityRelations = [
   {
-    name: 'leader',
+    value: 'leader',
     label: 'Líder'
   },
   {
-    name: 'member',
+    value: 'member',
     label: 'Membro'
   },
   {
-    name: 'visitor',
+    value: 'visitor',
     label: 'Visitante'
   },
   {
-    name: 'other',
+    value: 'other',
     label: 'Outro'
   }
 ]
 
 export const occupations = [
   {
-    name: 'retired',
+    value: 'retired',
     label: 'Aposentado'
   },
   {
-    name: 'autonomous',
+    value: 'autonomous',
     label: 'Autônomo'
   },
   {
-    name: 'employer',
+    value: 'employer',
     label: 'Empresário'
   },
   {
-    name: 'employee',
+    value: 'employee',
     label: 'Empregado'
   },
   {
-    name: 'unemployed',
+    value: 'unemployed',
     label: 'Desempregado'
   },
   {
-    name: 'other',
+    value: 'other',
     label: 'Outro'
   }
 ]
 
 export const categories = [{
-  name: 'input',
+  value: 'input',
   label: 'Entrada'
 }, {
-  name: 'output',
+  value: 'output',
   label: 'Saída'
 }]
 
 export const descriptions = [{
-  name: 'money',
+  value: 'money',
   label: 'Dinheiro'
 }, {
-  name: 'basicBaskets',
+  value: 'basicBaskets',
   label: 'Cesta Básica'
 }, {
-  name: 'hygieneProducts',
+  value: 'hygieneProducts',
   label: 'Produto de Higiene'
 }, {
-  name: 'hygieneProducts',
+  value: 'hygieneProducts',
   label: 'Equipamento de Proteção Individual'
 }, {
-  name: 'other',
+  value: 'other',
   label: 'Outro'
 }]
 
 export const recurrences = [
   {
-    name: 'diary',
+    value: 'diary',
     label: 'Diária'
   },
   {
-    name: 'weekly',
+    value: 'weekly',
     label: 'Semanal'
   },
   {
-    name: 'monthly',
+    value: 'monthly',
     label: 'Mensal'
   },
   {
-    name: 'Yearly',
+    value: 'Yearly',
     label: 'Anual'
   }
 ]

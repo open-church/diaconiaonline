@@ -31,12 +31,10 @@ const peopleSchema = new mongoose.Schema({
   },
   communityRelation: {
     type: String,
-    required: true,
     enum: Object.values(communityRelations).map(({ name }) => name)
   },
   occupation: {
     type: String,
-    required: true,
     enum: Object.values(occupations).map(({ name }) => name)
   },
   specialNeeds: {
@@ -49,6 +47,9 @@ const peopleSchema = new mongoose.Schema({
   },
   urgencies: {
     type: String
+  },
+  accept: {
+    type: Boolean
   },
   phone: String,
   address: {

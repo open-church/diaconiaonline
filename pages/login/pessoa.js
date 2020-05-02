@@ -1,18 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import * as B from '@bootstrap-styled/v4'
 import { Formik, Form } from 'formik'
 import Link from 'next/link'
+import Router from 'next/router'
+import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
 import * as E from '../../components/elements/styles'
 import Layout from '../../components/layout'
 import * as S from '../../components/loginStyles/styles'
+import { saveCredentials } from '../../helpers/auth'
 import { LoginSchema } from '../../schemas/login'
+import Api from '../../services/api'
 
-function UserLogin () {
+function PeopleLogin (props) {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const { credentials } = props
+    credentials && credentials.token ? goNextPage(credentials.entity) : setLoading(false)
+  }, [])
+
+  const login = async values => {
+    try {
+      const { data } = await Api.login({ ...values, entity: 'people' })
+      await saveCredentials({ ...data })
+      goNextPage(data.entity)
+    } catch (err) {
+      console.log('err', err)
+    }
+  }
+
+  const goNextPage = (entity) => {
+    Router.push(entity === 'community' ? '/dashboard' : '/cadastro/pessoa')
+  }
+
   return (
-    <Layout>
+    <Layout loading={loading}>
       <ThemeProvider theme={{ mode: 'user' }}>
         <S.PageContainer fluid>
           <B.Row>
@@ -28,10 +53,7 @@ function UserLogin () {
                     password: ''
                   }}
                   validationSchema={LoginSchema}
-                  onSubmit={values => {
-                    // same shape as initial values
-                    console.log(values)
-                  }}
+                  onSubmit={login}
                 >
                   {({ errors, touched }) => (
                     <Form>
@@ -46,7 +68,7 @@ function UserLogin () {
                       <Link href='/'><S.Forgot>Esqueci minha senha</S.Forgot></Link>
                       <S.ButtonsWrapper>
                         <E.CustomButton width="42%" type="submit" color="primary">Fazer login</E.CustomButton>
-                        <E.CustomButton width="54%" color="secondary">Cadastrar como usuário</E.CustomButton>
+                        <E.CustomButton tag={B.A} href="/cadastro/pessoa" width="54%" color="secondary">Cadastrar membro</E.CustomButton>
                       </S.ButtonsWrapper>
                     </Form>
                   )}
@@ -60,4 +82,8 @@ function UserLogin () {
   )
 }
 
-export default UserLogin
+PeopleLogin.propTypes = {
+  credentials: PropTypes.object
+}
+
+export default PeopleLogin

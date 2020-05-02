@@ -4,6 +4,7 @@ import { slugGenerate } from '../helpers/functions'
 import invalid from '../helpers/validators'
 import Community from '../models/community'
 import People from '../models/people'
+import { createToken } from './auth'
 
 export const getCommunity = async (req, res) => {
   try {
@@ -47,7 +48,7 @@ export const createCommunity = async (req, res) => {
 
     await Community.findOne(
       {
-        $or: [{ cnpj }, { email }]
+        email
       }, async (err, community) => {
         if (err) throw err
         try {
@@ -57,7 +58,9 @@ export const createCommunity = async (req, res) => {
           if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
           if (invalid.communityFinancialDetails(financialDetails)) return res.status(400).json({ message: 'CPF/CNPJ da conta bancária é inválido' })
           const code = await codeGenerate()
+          const token = createToken({ id: md5(new Date()) })
           const newCommunity = await new Community({
+            token,
             name,
             slug: slugGenerate(name),
             cnpj,

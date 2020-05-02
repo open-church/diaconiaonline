@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const CustomButton = styled(Button)`
   && {
     font-size: 1.25rem;
-    line-height: 1.35;
+    line-height: 2;
     height: 60px;
     width: ${({ width }) => width || '48%'}; 
     max-width: 310px;

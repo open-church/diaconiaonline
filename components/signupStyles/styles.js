@@ -57,7 +57,7 @@ export const ButtonsWrapper = styled.div`
 
 export const BgCol = styled(Col)`
   && {
-    background: url('../images/diaconia-online-formas-bg.png') center 20px/contain no-repeat;
+    background: url('/images/diaconia-online-formas-bg.jpg') center 20px/contain no-repeat;
   }
 `
 
@@ -81,10 +81,9 @@ export const P = styled.p`
 `
 
 export const CustomForm = styled(Form)`
-  display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  
+  ${({ hide }) => hide ? 'display: none' : 'display: flex'};
 `
 
 export const CustomField = styled(Field)`

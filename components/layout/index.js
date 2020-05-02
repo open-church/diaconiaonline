@@ -3,10 +3,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Footer from '../footer'
+import Loading from '../loading/'
+import Navbar from '../navBar/'
 
-function Layout ({ children }) {
+function Layout ({ children, loading }) {
   return (
     <>
+      <Navbar />
+      {loading && <Loading />}
       {children}
       <Footer />
     </>
@@ -14,6 +18,7 @@ function Layout ({ children }) {
 }
 
 Layout.propTypes = {
+  loading: PropTypes.bool,
   children: PropTypes.node
 }
 

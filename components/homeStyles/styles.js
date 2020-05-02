@@ -43,7 +43,7 @@ export const ButtonsWrapper = styled.div`
 
 export const BgCol = styled(Col)`
   && {
-    background: url('./images/diaconia-online-home-bg.png') 100% center/cover;
+    background: url('/images/diaconia-online-home-bg.jpg') 100% center/cover;
     min-height: 280px;
 
     @media (max-width: 992px) {

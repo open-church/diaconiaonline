@@ -55,7 +55,7 @@ export const ButtonsWrapper = styled.div`
 
 export const BgCol = styled(Col)`
   && {
-    background: url('../images/diaconia-online-login-bg.png') center/cover;
+    background: url('/images/diaconia-online-login-bg.jpg') center/cover;
     min-height: 284px;
   }
 `

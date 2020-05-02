@@ -19,7 +19,7 @@ function Navbar () {
       <Container>
         <div className={'d-flex justify-content-between'}>
           <NavbarBrand tag={A} href="/">
-            <S.Image src="./images/diaconia-online.svg" alt="Diaconia Online"/>
+            <S.Image src="/images/diaconia-online.svg" alt="Diaconia Online"/>
           </NavbarBrand>
           <NavbarToggler className={open ? 'close' : ''} onClick={() => setOpen(!open)} />
         </div>

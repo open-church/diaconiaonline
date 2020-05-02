@@ -4,7 +4,7 @@ import md5 from 'md5'
 import Community from '../models/community'
 import People from '../models/people'
 
-const createToken = auth => {
+export const createToken = auth => {
   return jwt.sign(
     { id: auth.id },
     process.env.SECRET_KEY,
@@ -62,7 +62,8 @@ export const login = async (req, res) => {
     doc.save()
     res.json({
       email: doc.email,
-      token
+      token,
+      entity
     })
   } catch (err) {
     return res.status(500).json({ message: 'Erro desconhecido ao logar', err })

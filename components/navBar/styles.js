@@ -19,13 +19,13 @@ export const Navbar = styled(BNavbar)`
   }
 
   .navbar-toggler-icon {
-    background: url('./images/ic-menu.svg') center / contain no-repeat;
+    background: url('/images/ic-menu.svg') center / contain no-repeat;
     position: relative;
     z-index: 10;
 
   }
   .close .navbar-toggler-icon {
-    background-image: url('./images/ic-close.svg');
+    background-image: url('/images/ic-close.svg');
   }
 `
 
