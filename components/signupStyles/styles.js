@@ -74,6 +74,15 @@ export const H4 = styled.h4`
   width: 100%;
 `
 
+export const Code = styled.h4`
+  color: ${color};
+  font-size: 2.5rem;
+  line-height: 0.5;
+  margin: 15px 0;
+  text-align: center;
+  width: 100%;
+`
+
 export const P = styled.p`
   color: ${colors.outerSpace};
   font-size: 20px;

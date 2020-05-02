@@ -6,14 +6,14 @@ import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
-import Alert from '../../components/alert'
-import * as E from '../../components/elements/styles'
-import Layout from '../../components/layout'
-import * as S from '../../components/signupStyles/styles'
-import TermsOfUse from '../../components/termsOfUse'
-import { saveCredentials } from '../../helpers/auth'
-import { CommunityRegisterSchema } from '../../schemas/communityRegister'
-import Api from '../../services/api'
+import Alert from '../../../components/alert'
+import * as E from '../../../components/elements/styles'
+import Layout from '../../../components/layout'
+import * as S from '../../../components/signupStyles/styles'
+import TermsOfUse from '../../../components/termsOfUse'
+import { saveCredentials } from '../../../helpers/auth'
+import { CommunityRegisterSchema } from '../../../schemas/communityRegister'
+import Api from '../../../services/api'
 
 function CommunitySignup (props) {
   const [loading, setLoading] = useState(true)
@@ -41,7 +41,7 @@ function CommunitySignup (props) {
         email: data.community.email,
         entity: 'community'
       })
-      Router.push('/login/comunidade')
+      Router.push('/cadastro/comunidade/sucesso')
     } catch (err) {
       setStep(1)
       window.scrollTo(0, 0)

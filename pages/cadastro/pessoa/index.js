@@ -6,14 +6,14 @@ import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
-import Alert from '../../components/alert'
-import * as E from '../../components/elements/styles'
-import Layout from '../../components/layout'
-import * as S from '../../components/signupStyles/styles'
-import TermsOfUse from '../../components/termsOfUse'
-import { saveCredentials } from '../../helpers/auth'
-import { UserRegisterSchema } from '../../schemas/userRegister'
-import Api from '../../services/api'
+import Alert from '../../../components/alert'
+import * as E from '../../../components/elements/styles'
+import Layout from '../../../components/layout'
+import * as S from '../../../components/signupStyles/styles'
+import TermsOfUse from '../../../components/termsOfUse'
+import { saveCredentials } from '../../../helpers/auth'
+import { UserRegisterSchema } from '../../../schemas/userRegister'
+import Api from '../../../services/api'
 
 function UserSignup (props) {
   const [relations, setRelations] = useState([])
@@ -50,7 +50,7 @@ function UserSignup (props) {
         email: data.people.email,
         entity: 'people'
       })
-      Router.push('/login/pessoa')
+      Router.push('/cadastro/pessoa/sucesso')
     } catch (err) {
       setStep(1)
       window.scrollTo(0, 0)
