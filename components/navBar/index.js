@@ -17,7 +17,7 @@ function Navbar () {
   return (
     <S.Navbar fixed="top" toggleable="lg" className={open ? 'open' : ''}>
       <Container>
-        <div className={'d-flex justify-content-between'}>
+        <div className="d-flex justify-content-between">
           <NavbarBrand tag={A} href="/">
             <S.Image src="/images/diaconia-online.svg" alt="Diaconia Online"/>
           </NavbarBrand>
