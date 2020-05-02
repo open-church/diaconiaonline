@@ -10,7 +10,8 @@ function Layout ({ children, loading }) {
   return (
     <>
       <Navbar />
-      {loading ? <Loading /> : children}
+      {loading && <Loading />}
+      {children}
       <Footer />
     </>
   )

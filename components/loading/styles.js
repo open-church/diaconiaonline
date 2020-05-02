@@ -8,9 +8,10 @@ export const Wrapper = styled.div`
   display: flex;
   height: 100vh;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100vw;
+  z-index: 10;
 `
 
 export const Brand = styled.img`

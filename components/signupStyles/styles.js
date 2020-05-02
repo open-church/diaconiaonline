@@ -81,10 +81,9 @@ export const P = styled.p`
 `
 
 export const CustomForm = styled(Form)`
-  display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  
+  ${({ hide }) => hide ? 'display: none' : 'display: flex'};
 `
 
 export const CustomField = styled(Field)`
