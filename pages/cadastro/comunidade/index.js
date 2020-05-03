@@ -12,6 +12,7 @@ import Layout from '../../../components/layout'
 import * as S from '../../../components/signupStyles/styles'
 import TermsOfUse from '../../../components/termsOfUse'
 import { saveCredentials } from '../../../helpers/auth'
+import { cnpjMask, zipCodeMask } from '../../../helpers/mask'
 import { CommunityRegisterSchema } from '../../../schemas/communityRegister'
 import Api from '../../../services/api'
 
@@ -124,20 +125,37 @@ function CommunitySignup (props) {
                         </S.Label>
                         <S.Label width="67%">
                           <legend>CNPJ</legend>
-                          <S.CustomField name="cnpj" placeholder="Insira o CNPJ aqui" />
+                          <S.CustomField name="cnpj" render={({ field }) => (
+                            <S.MaskField
+                              {...field}
+                              placeholder="Insira o CNPJ aqui"
+                              mask={cnpjMask}
+                              id="cnpj"
+                              type="text"
+                            />
+                          )} />
                           {errors.cnpj && touched.cnpj ? <S.Error>{errors.cnpj}</S.Error> : null}
                         </S.Label>
                         <S.Label width="33%">
                           <legend>CEP</legend>
-                          <S.CustomField name="address.zipCode" placeholder="Insira o CEP aqui"
-                            onBlur={async (e) => {
-                              const address = await getAddress(values)
-                              setFieldValue('address.country', address && address.state ? 'BR' : '')
-                              setFieldValue('address.state', address.state || '')
-                              setFieldValue('address.city', address.city || '')
-                              setFieldValue('address.street', address.street || '')
-                              setFieldValue('address.neighborhood', address.neighborhood || '')
-                            }}/>
+                          <S.CustomField name="address.zipCode" render={({ field }) => (
+                            <S.MaskField
+                              {...field}
+                              placeholder="Insira o CEP aqui"
+                              mask={zipCodeMask}
+                              id="cpf"
+                              type="text"
+                              onBlur={async (e) => {
+                                const address = await getAddress(values)
+                                setFieldValue('address.country', address && address.state ? 'BR' : '')
+                                setFieldValue('address.state', address.state || '')
+                                setFieldValue('address.city', address.city || '')
+                                setFieldValue('address.street', address.street || '')
+                                setFieldValue('address.neighborhood', address.neighborhood || '')
+                              }}
+                            />
+                          )}
+                          />
                           {errors.zipCode && touched.zipCode ? <S.Error>{errors.zipCode}</S.Error> : null}
                         </S.Label>
                         <S.Label width="33%">
@@ -167,7 +185,7 @@ function CommunitySignup (props) {
                         </S.Label>
                         <S.Label width="15%">
                           <legend>Número</legend>
-                          <S.CustomField name="address.number" placeholder="Insira o número aqui" />
+                          <S.CustomField name="address.number" type="number" placeholder="Insira o número aqui" />
                           {errors.number && touched.complement ? <S.Error>{errors.complement}</S.Error> : null}
                         </S.Label>
                         <S.Label width="85%">
