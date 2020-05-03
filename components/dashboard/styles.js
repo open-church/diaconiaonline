@@ -175,6 +175,25 @@ export const MoneyWrapper = styled(Container)`
     right: 5px;
     top: 15px;
   }
+  @media (max-width: 992px) {
+    justify-content: flex-start;
+  
+    h2 {
+      font-size: 1.875rem;
+      line-height: 1.333;
+      margin: 15px 0 0 15px;
+      text-align: left;
+    }
+    p {
+      font-size: 0.875rem;
+      line-height: 1.4285;
+      text-align: left;
+      margin-left: 15px;
+    }
+    img {
+      max-width: 24px;
+    }
+  }
   @media (max-width: 768px) {
     width: calc(100% - 30px);
   }
@@ -217,19 +236,26 @@ export const ItemBox = styled.div`
     margin: 0;
     text-align: right;
   }
+
+  @media (max-width: 992px) {
+    display: block;
+    width: calc(33.33% - 10px);
+    h2 {
+      font-size: 1.875rem;
+      line-height: 1.333;
+      margin: 0 0 5px;
+      text-align: left;
+    }
+    p {
+      font-size: 0.625rem;
+      line-height: 1.4;
+      text-align: left;
+    }
+    img {
+      max-width: 24px;
+    }
+  }
 `
-
-// export const CardsWrapper = styled(Container)`
-//   padding: 0;
-//   display: flex;
-//   justify-content: space-between;
-//   margin: 15px auto;
-//   flex-wrap: wrap;
-
-//   @media (max-width: 768px) {
-//     width: calc(100% - 30px);
-//   }
-// `
 
 export const CardsWrapper = styled(Container)`
   display: grid; 
@@ -237,10 +263,16 @@ export const CardsWrapper = styled(Container)`
   grid-gap: 20px; 
   justify-content: space-between; 
   margin: 15px auto;
+  
 
   @media (max-width: 992px) {
     grid-template-columns: repeat(2, 1fr); 
     grid-gap: 15px; 
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+    width: calc(100% - 30px);
   }
 `
 
@@ -255,6 +287,10 @@ export const CustomSelect = styled(Select)`
   @media (max-width: 992px) {
     grid-column: 1 / span 2;
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+  }
 `
 
 export const Card = styled.div`
@@ -264,6 +300,10 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+  }
 `
 
 export const CardIcon = styled.div`

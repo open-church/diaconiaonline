@@ -25,7 +25,7 @@ const UserDetails = ({ member, occupations }) => {
       <S.CardRow>
         <div>
           <S.CardSub>Uso de Medicamentos</S.CardSub>
-          <p>{member.controlledMedication.description}</p>
+          <p>{member.controlledMedication && member.controlledMedication.description}</p>
         </div>
         <div>
           <S.CardSub>Urgência</S.CardSub>
@@ -33,6 +33,11 @@ const UserDetails = ({ member, occupations }) => {
         </div>
         <div>
           <S.CardSub>Endereço</S.CardSub>
+          <p>
+            {member.address.street}, {member.address.number}, {member.address.complement}<br/>
+            {member.address.neighborhood}, {member.address.city} - {member.address.state}<br/>
+            {member.address.zipCode}
+          </p>
         </div>
       </S.CardRow>
     </S.Card>

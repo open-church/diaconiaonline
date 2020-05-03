@@ -79,15 +79,24 @@ export const CardRow = styled.div`
   display: flex;
 
   & > div {
-    flex: 1;
+    flex: 0.7;
 
     &:not(:first-of-type) {
       margin-left: 15px;
+      flex: 1;
     }
   }
 
   p {
     font-size: 0.875rem;
     margin: 0;
+  }
+
+  @media(max-width: 768px) {
+    display: block;
+    
+    && div {
+      margin: 10px 0; 
+    }
   }
 `
