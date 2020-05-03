@@ -6,22 +6,28 @@ import PropTypes from 'prop-types'
 
 import * as S from '../../components/dashboard/styles'
 import Layout from '../../components/layout'
+import withSession from '../../hoc/withSession'
+import useSession from '../../hooks/useSession'
 import Api from '../../services/api'
 
 function UserDashboard (props) {
+  const { session, token } = useSession()
   const [loading, setLoading] = useState(true)
   const [people, setPeople] = useState({})
 
+  console.log('dashboard/pessoa', session, token)
+
   useEffect(() => {
-    const { credentials } = props
+    // const { credentials } = props
     const getPeople = async () => {
-      const { data } = await Api.getPeople()
+      const { data } = await Api.getPeople(token)
       setPeople(data)
       setLoading(false)
     }
-    if (!credentials || !credentials.entity) return Router.push('/login/pessoa')
-    credentials.entity === 'people' && getPeople()
-    credentials.entity === 'community' && Router.push('/dashboard/comunidade')
+    getPeople()
+    // if (!credentials || !credentials.entity) return Router.push('/login/pessoa')
+    // credentials.entity === 'people' && getPeople()
+    // credentials.entity === 'community' && Router.push('/dashboard/comunidade')
   }, [])
 
   const check = (field) => field && field.length > 0
@@ -87,4 +93,4 @@ UserDashboard.propTypes = {
   credentials: PropTypes.object
 }
 
-export default UserDashboard
+export default withSession(UserDashboard)

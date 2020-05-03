@@ -4,39 +4,29 @@ import * as B from '@bootstrap-styled/v4'
 import { Formik, Form } from 'formik'
 import Link from 'next/link'
 import Router from 'next/router'
-import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
 import * as E from '../../components/elements/styles'
 import Layout from '../../components/layout'
 import * as S from '../../components/loginStyles/styles'
-import { useDispatchSession } from '../../components/state/session'
-import { saveCredentials } from '../../helpers/auth'
+import useSession from '../../hooks/useSession'
 import { LoginSchema } from '../../schemas/login'
 import Api from '../../services/api'
 
 function PeopleLogin (props) {
+  const { session, token, login } = useSession()
   const [loading, setLoading] = useState(true)
-  const dispatch = useDispatchSession()
 
   useEffect(() => {
-    const { credentials } = props
-    if (credentials && credentials.entity) {
-      credentials.entity === 'people' && Router.push('/dashboard/pessoa')
-      credentials.entity === 'community' && Router.push('/dashboard/comunidade')
-    } else {
-      setLoading(false)
-    }
+    setLoading(false)
+    console.log('login/pessoa', session, token)
   }, [])
 
-  const login = async values => {
+  const onSubmit = async values => {
     try {
+      setLoading(true)
       const { data } = await Api.login({ ...values, entity: 'people' })
-      await saveCredentials({ ...data })
-      dispatch({
-        type: 'UPDATE',
-        payload: data
-      })
+      login(data)
       Router.push('/dashboard/pessoa')
     } catch (err) {
       console.log('err', err)
@@ -60,7 +50,7 @@ function PeopleLogin (props) {
                     password: ''
                   }}
                   validationSchema={LoginSchema}
-                  onSubmit={login}
+                  onSubmit={onSubmit}
                 >
                   {({ errors, touched }) => (
                     <Form>
@@ -87,10 +77,6 @@ function PeopleLogin (props) {
       </ThemeProvider>
     </Layout>
   )
-}
-
-PeopleLogin.propTypes = {
-  credentials: PropTypes.object
 }
 
 export default PeopleLogin

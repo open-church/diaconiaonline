@@ -34,33 +34,28 @@ class Api {
     return api.post('/people', people).then(response => response).catch(error => error)
   }
 
-  async updateCommunity (community) {
-    const credentials = getCredentials()
-    this.setHeader(credentials.token)
+  async updateCommunity (community, token) {
+    this.setHeader(token)
     return api.put('/community', community).then(response => response).catch(error => error)
   }
 
-  async updatePeople (people) {
-    const credentials = getCredentials()
-    this.setHeader(credentials.token)
+  async updatePeople (people, token) {
+    this.setHeader(token)
     return api.put('/people', people).then(response => response).catch(error => error)
   }
 
-  async getCommunity () {
-    const credentials = getCredentials()
-    this.setHeader(credentials.token)
+  async getCommunity (token) {
+    this.setHeader(token)
     return api.get('/community').then(response => response).catch(error => error)
   }
 
-  async getMyMembers () {
-    const credentials = getCredentials()
-    this.setHeader(credentials.token)
+  async getMyMembers (token) {
+    this.setHeader(token)
     return api.get('/community/members').then(response => response).catch(error => error)
   }
 
-  async getPeople () {
-    const credentials = getCredentials()
-    this.setHeader(credentials.token)
+  async getPeople (token) {
+    this.setHeader(token)
     return api.get('/people').then(response => response).catch(error => error)
   }
 

@@ -7,7 +7,6 @@ import Loading from '../loading/'
 import Navbar from '../navBar/'
 
 function Layout ({ children, loading, navLight }) {
-  console.log('navLight', navLight)
   return (
     <>
       <Navbar light={!!navLight}/>

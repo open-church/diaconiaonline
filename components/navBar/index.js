@@ -12,12 +12,10 @@ import {
 import PropTypes from 'prop-types'
 
 import { logout } from '../../helpers/auth'
-import { useSession } from '../state/session'
 import * as S from './styles'
 
 function Navbar ({ light }) {
   const [open, setOpen] = useState(false)
-  console.log('useSession', useSession())
 
   return (
     <S.Navbar light={light} fixed="top" toggleable="lg" className={open ? 'open' : ''}>
