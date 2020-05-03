@@ -16,7 +16,6 @@ import * as S from './styles'
 
 function Navbar ({ light }) {
   const [open, setOpen] = useState(false)
-  console.log('light', light)
 
   return (
     <S.Navbar light={light} fixed="top" toggleable="lg" className={open ? 'open' : ''}>
