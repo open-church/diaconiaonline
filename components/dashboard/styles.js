@@ -219,44 +219,51 @@ export const ItemBox = styled.div`
   }
 `
 
+// export const CardsWrapper = styled(Container)`
+//   padding: 0;
+//   display: flex;
+//   justify-content: space-between;
+//   margin: 15px auto;
+//   flex-wrap: wrap;
+
+//   @media (max-width: 768px) {
+//     width: calc(100% - 30px);
+//   }
+// `
+
 export const CardsWrapper = styled(Container)`
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  grid-gap: 20px; 
+  justify-content: space-between; 
   margin: 15px auto;
-  flex-wrap: wrap;
-  @media (max-width: 768px) {
-    width: calc(100% - 30px);
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr); 
+    grid-gap: 15px; 
   }
 `
 
 export const CustomSelect = styled(Select)`
-  width: 100%;
-  margin-bottom: 30px;
+  grid-column: 1 / span 4;
   .react-select {
     &__control {
       border: none;
       box-shadow: 0 3px 6px rgba(13,2,2,0.30);
     }
   }
+  @media (max-width: 992px) {
+    grid-column: 1 / span 2;
+  }
 `
 
 export const Card = styled.div`
   padding: 10px;
   box-shadow: 0 3px 6px rgba(13,2,2,0.30);
-  width: calc(25% - 9px);
   box-sizing: border-box;
-  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  @media (max-width: 992px) {
-    width: calc(50% - 4.5px);
-    margin-bottom: 9px;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `
 
 export const CardIcon = styled.div`
@@ -270,7 +277,7 @@ export const CardIcon = styled.div`
 `
 
 export const CardTitle = styled.div`
-  width: calc(100% - 48px);
+  width: calc(100% - 43px);
   h3 {
     color: ${colors.blueZodiac};
     line-height: 1.125;
