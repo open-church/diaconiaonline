@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 
 import * as S from '../../components/dashboard/styles'
 import Layout from '../../components/layout'
+import UserDetails from '../../components/userDetails'
 import Api from '../../services/api'
 
 const selectOptions = [
@@ -21,6 +22,8 @@ function CommunityDashboard (props) {
   const [occupations, setOccupations] = useState([])
   const [members, setMembers] = useState([])
   const [filteredMembers, setFilteredMembers] = useState([])
+  const [modal, setModal] = useState(false)
+  const [memberModal, setMemberModal] = useState({})
 
   useEffect(() => {
     const { credentials } = props
@@ -67,6 +70,10 @@ function CommunityDashboard (props) {
       (tempFiltered = tempFiltered.filter(member => member.urgencies))
 
     setFilteredMembers(tempFiltered)
+  }
+
+  const handleModal = () => {
+    setModal(!modal)
   }
 
   return (
@@ -136,9 +143,19 @@ function CommunityDashboard (props) {
                 {member.controlledMedication && member.controlledMedication.value && <S.Highlight icon="pill"/>}
                 {member.specialNeeds && member.specialNeeds.value && <S.Highlight icon="star"/>}
               </S.CardHighlight>
+              <S.CardLink onClick={() => {
+                handleModal()
+                setMemberModal(member)
+              }} href="#">Ver dados completos</S.CardLink>
             </S.Card>
           ))}
         </S.CardsWrapper>
+        <B.Modal className="user-details" isOpen={modal} toggle={handleModal}>
+          <B.ModalHeader toggle={handleModal}></B.ModalHeader>
+          <B.ModalBody>
+            <UserDetails member={memberModal} occupations={occupations}/>
+          </B.ModalBody>
+        </B.Modal>
       </S.Wrapper>
     </Layout>
   )

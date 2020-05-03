@@ -323,5 +323,12 @@ export const Highlight = styled.p`
         background-size: 18px;
         position: absolute;
         left: 0;`
+    }
   }
+`
+
+export const CardLink = styled.a`
+  color: ${colors.burningOrange};
+  font-size: 0.875rem;
+  width: 100%;
 `

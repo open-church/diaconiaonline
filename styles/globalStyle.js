@@ -17,6 +17,11 @@ body {
   margin: 0;
 }
 
+body.overflow {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
 main {
   display: block;
 }
@@ -186,5 +191,35 @@ template {
 
 [hidden] {
   display: none;
+}
+
+/** USER MODAL **/
+
+.user-details .modal .modal-dialog.modal-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 880px;
+  width: calc(100% - 30px);
+}
+
+.user-details .modal .modal-dialog .modal-content {
+  border: none;
+  border-radius: 0;
+} 
+
+.user-details .modal-header {
+  border-bottom: none;
+}
+
+.user-details .modal-header h4 {
+  display: none;
+}
+
+.user-details .modal-header .close {
+  opacity: 1;
+  font-weight: normal;
+  font-size: 2rem;
 }
 `
