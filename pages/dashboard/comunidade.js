@@ -24,7 +24,7 @@ function CommunityDashboard (props) {
 
   useEffect(() => {
     const { credentials } = props
-    const getPeople = async () => {
+    const getCommunity = async () => {
       const communityResponse = await Api.getCommunity()
       const membersResponse = await Api.getMyMembers()
       const occupationsResponse = await Api.getOccupations()
@@ -34,9 +34,9 @@ function CommunityDashboard (props) {
       setLoading(false)
       setFilteredMembers(membersResponse.data)
     }
-    if (!credentials) return Router.push('/login/comunidade')
+    if (!credentials || !credentials.entity) return Router.push('/login/comunidade')
     credentials.entity === 'people' && Router.push('/dashboard/people')
-    credentials.entity === 'community' && getPeople()
+    credentials.entity === 'community' && getCommunity()
   }, [])
 
   const numberWithDot = (x) => {

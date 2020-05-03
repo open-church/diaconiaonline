@@ -6,10 +6,11 @@ import Footer from '../footer'
 import Loading from '../loading/'
 import Navbar from '../navBar/'
 
-function Layout ({ children, loading }) {
+function Layout ({ children, loading, navLight }) {
+  console.log('navLight', navLight)
   return (
     <>
-      <Navbar />
+      <Navbar light={!!navLight}/>
       {loading && <Loading />}
       {children}
       <Footer />
@@ -18,8 +19,9 @@ function Layout ({ children, loading }) {
 }
 
 Layout.propTypes = {
+  children: PropTypes.node,
   loading: PropTypes.bool,
-  children: PropTypes.node
+  navLight: PropTypes.bool
 }
 
 export default Layout

@@ -9,33 +9,44 @@ import {
   Nav,
   NavItem
 } from '@bootstrap-styled/v4'
+import PropTypes from 'prop-types'
 
+import { logout } from '../../helpers/auth'
 import * as S from './styles'
 
-function Navbar () {
+function Navbar ({ light }) {
   const [open, setOpen] = useState(false)
+  console.log('light', light)
+
   return (
-    <S.Navbar fixed="top" toggleable="lg" className={open ? 'open' : ''}>
+    <S.Navbar light={light} fixed="top" toggleable="lg" className={open ? 'open' : ''}>
       <Container>
         <div className="d-flex justify-content-between">
-          <NavbarBrand tag={A} href="/">
+          <NavbarBrand tag={A} href="/" title="Acessar página inicial">
             <S.Image src="/images/diaconia-online.svg" alt="Diaconia Online"/>
           </NavbarBrand>
-          <NavbarToggler className={open ? 'close' : ''} onClick={() => setOpen(!open)} />
+          <NavbarToggler className={open ? 'close' : ''} onClick={() => setOpen(!open)} title={open ? 'Fechar' : 'Abrir'}/>
         </div>
         <Collapse navbar isOpen={open}>
           <Nav navbar className="ml-auto my-2 my-lg-0">
             <NavItem>
-              <S.NavLink href="/quem-somos">Quem somos</S.NavLink>
+              <S.NavLink href="/quem-somos" title="Que Somos">Quem somos</S.NavLink>
             </NavItem>
             <NavItem>
-              <S.NavLink href="/ajuda">Ajuda</S.NavLink>
+              <S.NavLink href="/ajuda" title="Ajuda">Ajuda</S.NavLink>
+            </NavItem>
+            <NavItem>
+              <S.NavLink href='/' onClick={logout} title="Sair">Sair</S.NavLink>
             </NavItem>
           </Nav>
         </Collapse>
       </Container>
     </S.Navbar>
   )
+}
+
+Navbar.propTypes = {
+  light: PropTypes.bool
 }
 
 export default Navbar

@@ -8,6 +8,7 @@ import { colors } from '../../utils/variables'
 
 export const Navbar = styled(BNavbar)`
   && {
+    background: ${({ light }) => light ? colors.white : colors.cloudBurst};
     position: fixed;
     width: calc(100% - 30px);
     z-index: 10;
