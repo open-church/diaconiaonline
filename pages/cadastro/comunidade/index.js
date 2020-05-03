@@ -68,7 +68,7 @@ function CommunitySignup (props) {
   }
 
   return (
-    <Layout loading={loading} navLight>
+    <Layout loading={loading}>
       <ThemeProvider theme={{ mode: 'community' }}>
         <S.PageContainer>
           <B.Row>

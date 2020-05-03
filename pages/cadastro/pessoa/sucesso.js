@@ -11,7 +11,7 @@ import * as S from '../../../components/signupStyles/styles'
 
 function PeopleSuccess (props) {
   return (
-    <Layout navLight>
+    <Layout>
       <ThemeProvider theme={{ mode: 'user' }}>
         <Flex.PageContainer fluid>
           <B.Row>

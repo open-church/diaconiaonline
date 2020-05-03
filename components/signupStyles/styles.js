@@ -58,7 +58,7 @@ export const ButtonsWrapper = styled.div`
 
 export const BgCol = styled(Col)`
   && {
-    background: url('/images/diaconia-online-formas-bg.jpg') center 20px/contain no-repeat;
+    background: url('/images/diaconia-online-formas-bg.jpg') center 60px/contain no-repeat;
   }
 `
 
