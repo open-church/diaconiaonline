@@ -9,8 +9,9 @@
     "dev": "nodemon",
     "seed": "babel-node ./server/seed/index.js",
     "lint": "eslint ./",
-    "build": "NODE_ENV=production babel ./server/ --out-dir .next/dist",
-    "start": "node ./.next/dist/app.js -p $PORT"
+    "build": "next build && yarn build:server",
+    "build:server": "NODE_ENV=production babel ./server/ --out-dir .next/dist",
+    "start": "node .next/dist/app.js -p $PORT"
   },
   "dependencies": {
     "@bootstrap-styled/provider": "^2.0.2",
