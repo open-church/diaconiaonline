@@ -12,6 +12,7 @@ import Layout from '../../../components/layout'
 import * as S from '../../../components/signupStyles/styles'
 import TermsOfUse from '../../../components/termsOfUse'
 import { saveCredentials } from '../../../helpers/auth'
+import { cpfMask, zipCodeMask } from '../../../helpers/mask'
 import { UserRegisterSchema } from '../../../schemas/userRegister'
 import Api from '../../../services/api'
 
@@ -76,7 +77,7 @@ function UserSignup (props) {
   }
 
   return (
-    <Layout loading={loading} navLight>
+    <Layout loading={loading}>
       <ThemeProvider theme={{ mode: 'user' }}>
         <S.PageContainer>
           <B.Row>
@@ -137,20 +138,42 @@ function UserSignup (props) {
                         </S.Label>
                         <S.Label width="33%">
                           <legend>CPF</legend>
-                          <S.CustomField name="cpf" placeholder="Insira o CPF aqui" />
+                          <S.CustomField
+                            name="cpf"
+                            render={({ field }) => (
+                              <S.MaskField
+                                {...field}
+                                placeholder="Insira o CPF aqui"
+                                mask={cpfMask}
+                                id="cpf"
+                                type="text"
+                              />
+                            )}
+                          />
                           {errors.cpf && touched.cpf ? <S.Error>{errors.cpf}</S.Error> : null}
                         </S.Label>
                         <S.Label width="33%">
                           <legend>CEP</legend>
-                          <S.CustomField name="address.zipCode" placeholder="Insira o CEP aqui"
-                            onBlur={async (e) => {
-                              const address = await getAddress(values)
-                              setFieldValue('address.country', address && address.state ? 'BR' : '')
-                              setFieldValue('address.state', address.state || '')
-                              setFieldValue('address.city', address.city || '')
-                              setFieldValue('address.street', address.street || '')
-                              setFieldValue('address.neighborhood', address.neighborhood || '')
-                            }}/>
+                          <S.CustomField
+                            name="address.zipCode"
+                            render={({ field }) => (
+                              <S.MaskField
+                                {...field}
+                                placeholder="Insira o CEP aqui"
+                                mask={zipCodeMask}
+                                id="cpf"
+                                type="text"
+                                onBlur={async (e) => {
+                                  const address = await getAddress(values)
+                                  setFieldValue('address.country', address && address.state ? 'BR' : '')
+                                  setFieldValue('address.state', address.state || '')
+                                  setFieldValue('address.city', address.city || '')
+                                  setFieldValue('address.street', address.street || '')
+                                  setFieldValue('address.neighborhood', address.neighborhood || '')
+                                }}
+                              />
+                            )}
+                          />
                           {errors.zipCode && touched.zipCode ? <S.Error>{errors.zipCode}</S.Error> : null}
                         </S.Label>
                         <S.Label width="33%">
@@ -180,7 +203,7 @@ function UserSignup (props) {
                         </S.Label>
                         <S.Label width="35%">
                           <legend>Número</legend>
-                          <S.CustomField name="address.number" placeholder="Insira o número aqui" />
+                          <S.CustomField name="address.number" type="number" placeholder="Insira o número aqui" />
                           {errors.number && touched.complement ? <S.Error>{errors.complement}</S.Error> : null}
                         </S.Label>
                         <S.Label width="65%">

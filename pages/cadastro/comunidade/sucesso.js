@@ -27,7 +27,7 @@ function CommunitySuccess (props) {
   }, [])
 
   return (
-    <Layout loading={loading} navLight>
+    <Layout loading={loading}>
       <ThemeProvider theme={{ mode: 'community' }}>
         <Flex.PageContainer fluid>
           <B.Row>
