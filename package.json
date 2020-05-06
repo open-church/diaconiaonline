@@ -9,8 +9,10 @@
     "dev": "nodemon",
     "seed": "babel-node ./server/seed/index.js",
     "lint": "eslint ./",
-    "build": "next build",
-    "start": "next start"
+    "build": "yarn build:next && yarn build:server",
+    "build:next": "next build",
+    "build:server": "NODE_ENV=production babel ./server/ --out-dir .next/dist",
+    "start": "node .next/dist/app.js -p $PORT"
   },
   "dependencies": {
     "@bootstrap-styled/provider": "^2.0.2",
@@ -39,9 +41,10 @@
     "yup": "^0.28.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.7",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
