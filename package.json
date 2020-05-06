@@ -10,8 +10,7 @@
     "seed": "babel-node ./server/seed/index.js",
     "lint": "eslint ./",
     "build": "next build",
-    "build:server": "NODE_ENV=production babel ./",
-    "start": "NODE_ENV=production babel-node ./server/app.js -p $PORT"
+    "start": "babel-node ./server/app.js -p $PORT"
   },
   "dependencies": {
     "@babel/core": "^7.9.6",
