@@ -1,4 +1,5 @@
 import Select from 'react-select'
+import MaskedInput from 'react-text-mask'
 
 import { Container, Col } from '@bootstrap-styled/v4'
 import { Field, Form } from 'formik'
@@ -57,7 +58,7 @@ export const ButtonsWrapper = styled.div`
 
 export const BgCol = styled(Col)`
   && {
-    background: url('/images/diaconia-online-formas-bg.jpg') center 20px/contain no-repeat;
+    background: url('/images/diaconia-online-formas-bg.jpg') center 60px/contain no-repeat;
   }
 `
 
@@ -96,10 +97,27 @@ export const CustomForm = styled(Form)`
 `
 
 export const CustomField = styled(Field)`
-  width: 100%;
-  padding: 15px 25px;
-  border: solid 1px ${color};
   border-radius: 3px;
+  border: solid 1px ${color};
+  padding: 15px 25px;
+  width: 100%;
+
+  ${({ disabled }) => disabled && `
+    background: ${colors.alto};
+    cursor: not-allowed;
+  `};
+
+  &::placeholder {
+    color: ${colors.outerSpace};
+    font-style: italic;
+  }
+`
+
+export const MaskField = styled(MaskedInput)`
+  border-radius: 3px;
+  border: solid 1px ${color};
+  padding: 15px 25px;
+  width: 100%;
 
   &::placeholder {
     color: ${colors.outerSpace};

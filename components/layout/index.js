@@ -18,8 +18,8 @@ function Layout ({ children, loading }) {
 }
 
 Layout.propTypes = {
-  loading: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  loading: PropTypes.bool
 }
 
 export default Layout
