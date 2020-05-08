@@ -15,7 +15,7 @@ import Api from '../../../services/api'
 
 function CommunityForgotPassword (props) {
   const [loading, setLoading] = useState(true)
-  const [feedbackMessage, setFeedbackMessage] = useState({ show: false, message: '' })
+  const [feedbackMessage, setFeedbackMessage] = useState({ show: false, type: 'error', message: '' })
 
   useEffect(() => {
     const { credentials } = props
@@ -53,7 +53,7 @@ function CommunityForgotPassword (props) {
               <S.ContentWrapper>
                 <S.H3>Nova senha</S.H3>
                 <S.P>Informe seu e-mail enviaremos uma nova senha para acesso.</S.P>
-                {feedbackMessage.show && <Alert message={feedbackMessage.message} type="error" />}
+                {feedbackMessage.show && <Alert message={feedbackMessage.message} type={feedbackMessage.type} />}
                 <Formik
                   initialValues={{ email: '' }}
                   validationSchema={ForgotPasswordSchema}
