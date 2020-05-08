@@ -73,7 +73,7 @@ function CommunityLogin (props) {
                       {errors.password && touched.password ? (
                         <S.Error>{errors.password}</S.Error>
                       ) : null}
-                      <Link href='/login/comunidade/nova-senha' title="Esqueci a senha"><S.Forgot>Esqueci minha senha</S.Forgot></Link>
+                      <Link href='/login/comunidade/nova-senha'><S.Forgot title="Esqueci a senha">Esqueci minha senha</S.Forgot></Link>
                       <S.ButtonsWrapper>
                         <E.CustomButton width="42%" type="submit" color="info">Fazer login</E.CustomButton>
                         <E.CustomButton tag={B.A} href="/cadastro/comunidade" width="54%" color="danger">Cadastrar comunidade</E.CustomButton>
