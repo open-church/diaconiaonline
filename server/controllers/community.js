@@ -1,10 +1,21 @@
 import md5 from 'md5'
 
-import { slugGenerate } from '../helpers/functions'
+import { slugGenerate, passwordGenerate } from '../helpers/functions'
 import invalid from '../helpers/validators'
 import Community from '../models/community'
 import People from '../models/people'
 import { createToken } from './auth'
+import { sendResetPassword } from './emails'
+
+const codeGenerate = async () => {
+  let community = true
+  let code = null
+  while (community) {
+    code = `${passwordGenerate(1)}${Math.floor(Date.now() / 1000).toString().slice(-4)}${passwordGenerate(1)}`
+    community = await Community.findOne({ code })
+  }
+  return code
+}
 
 export const getCommunity = async (req, res) => {
   try {
@@ -28,17 +39,6 @@ export const getMembers = async (req, res) => {
   }
 }
 
-const codeGenerate = async () => {
-  let community = true
-  let code = null
-  while (community) {
-    code = Math.floor(Date.now() / 1000).toString()
-    code = code.substr(code.length - 6, code.length)
-    community = await Community.findOne({ code })
-  }
-  return code
-}
-
 export const createCommunity = async (req, res) => {
   try {
     const {
@@ -52,7 +52,7 @@ export const createCommunity = async (req, res) => {
       }, async (err, community) => {
         if (err) throw err
         try {
-          if (community) return res.status(400).json({ message: 'Comunidade já cadastrada' })
+          if (community) return res.status(400).json({ message: 'Email da comunidade já cadastrado' })
           if (invalid.email(email)) return res.status(400).json({ message: 'Email inválido' })
           if (invalid.communityCNPJ(cnpj)) return res.status(400).json({ message: 'CNPJ inválido' })
           if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
@@ -135,6 +135,30 @@ export const updatePassword = async (req, res) => {
         community.password = md5(newPassword)
         const newCommunity = await community.save()
         return res.json({ message: 'Credenciais da comunidade atualizadas', community: { ...newCommunity._doc } })
+      }
+    )
+  } catch (err) {
+    return res.status(500).json({ message: 'Erro desconhecido ao atualizar as credenciais da comunidade', err })
+  }
+}
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { email } = req.body
+    await Community.findOne(
+      {
+        email
+      }, async (err, community) => {
+        if (err) throw err
+        if (!community) return res.status(404).json({ message: 'Email não cadastrado' })
+        const newPassword = passwordGenerate()
+        community.password = md5(newPassword)
+        await community.save()
+        if (await sendResetPassword(email, newPassword)) {
+          return res.json({ message: 'Senha alterada e enviada por email' })
+        } else {
+          throw err
+        }
       }
     )
   } catch (err) {

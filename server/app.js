@@ -33,6 +33,10 @@ app
     server.use(bodyParser.json())
     server.use('/api', apiRoutes)
 
+    server.get('/p/:communityCode', (req, res) => {
+      res.redirect(`/cadastro/pessoa?code=${req.params.communityCode}`)
+    })
+
     server.all('*', (req, res) => {
       return handle(req, res)
     })

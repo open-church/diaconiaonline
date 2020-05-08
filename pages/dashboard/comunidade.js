@@ -9,6 +9,8 @@ import Layout from '../../components/layout'
 import UserDetails from '../../components/userDetails'
 import Api from '../../services/api'
 
+const { PREFIX_COMMUNITY_URL } = process.env
+
 const selectOptions = [
   { value: 'unemployed', label: 'Desempregado' },
   { value: 'specialNeeds', label: 'PcD' },
@@ -16,7 +18,7 @@ const selectOptions = [
   { value: 'controlledMedication', label: 'Necessidade de medicamentos' }
 ]
 
-function CommunityDashboard (props) {
+function CommunityDashboard ({ credentials }) {
   const [loading, setLoading] = useState(true)
   const [community, setCommunity] = useState({})
   const [occupations, setOccupations] = useState([])
@@ -26,7 +28,6 @@ function CommunityDashboard (props) {
   const [memberModal, setMemberModal] = useState({})
 
   useEffect(() => {
-    const { credentials } = props
     const getCommunity = async () => {
       const communityResponse = await Api.getCommunity()
       const membersResponse = await Api.getMyMembers()
@@ -77,7 +78,7 @@ function CommunityDashboard (props) {
   }
 
   return (
-    <Layout loading={loading}>
+    <Layout loading={loading} credentials={credentials}>
       <S.Wrapper>
         <S.TopContainer fluid community={true}/>
         <S.CustomContainer>
@@ -85,7 +86,9 @@ function CommunityDashboard (props) {
             <B.Col>
               <S.H1>Olá, comunidade!</S.H1>
               <S.P>Este é o seu painel de gerenciamento.<br/>
-              Veja quanto sua comunidade tem em caixa, os itens disponíveis para doação e os membros cadastrados.</S.P>
+                Veja quanto sua comunidade tem em caixa, os itens disponíveis para doação e os membros cadastrados. <br />
+                O código e link da comunidade para cadastro de outros membros são <S.Code>{community.code}</S.Code> e <S.Code>{PREFIX_COMMUNITY_URL}/{community.code}</S.Code>.
+              </S.P>
             </B.Col>
           </B.Row>
         </S.CustomContainer>
