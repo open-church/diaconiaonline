@@ -6,10 +6,10 @@ import Footer from '../footer'
 import Loading from '../loading/'
 import Navbar from '../navBar/'
 
-function Layout ({ children, loading }) {
+function Layout ({ children, loading, credentials }) {
   return (
     <>
-      <Navbar />
+      <Navbar credentials={credentials}/>
       {loading && <Loading />}
       {children}
       <Footer />
@@ -18,6 +18,7 @@ function Layout ({ children, loading }) {
 }
 
 Layout.propTypes = {
+  credentials: PropTypes.object,
   children: PropTypes.node,
   loading: PropTypes.bool
 }

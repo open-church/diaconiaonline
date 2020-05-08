@@ -9,11 +9,12 @@ import {
   Nav,
   NavItem
 } from '@bootstrap-styled/v4'
+import PropTypes from 'prop-types'
 
 import { logout } from '../../helpers/auth'
 import * as S from './styles'
 
-function Navbar () {
+function Navbar ({ credentials }) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -33,14 +34,20 @@ function Navbar () {
             <NavItem>
               <S.NavLink href="/ajuda" title="Ajuda">Ajuda</S.NavLink>
             </NavItem>
-            <NavItem>
-              <S.NavLink href='/' onClick={logout} title="Sair">Sair</S.NavLink>
-            </NavItem>
+            {credentials && credentials.token && (
+              <NavItem>
+                <S.NavLink href='/' onClick={logout} title="Sair">Sair</S.NavLink>
+              </NavItem>
+            )}
           </Nav>
         </Collapse>
       </Container>
     </S.Navbar>
   )
+}
+
+Navbar.propTypes = {
+  credentials: PropTypes.object
 }
 
 export default Navbar
