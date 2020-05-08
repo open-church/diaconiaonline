@@ -18,6 +18,10 @@ export const Navbar = styled(BNavbar)`
     height: 100vh;
   }
 
+  .navbar-toggler {
+    cursor: pointer
+  }
+
   .navbar-toggler-icon {
     background: url('/images/ic-menu.svg') center / contain no-repeat;
     position: relative;
