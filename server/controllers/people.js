@@ -1,10 +1,11 @@
 import md5 from 'md5'
 
-import { slugGenerate } from '../helpers/functions'
+import { slugGenerate, passwordGenerate } from '../helpers/functions'
 import invalid from '../helpers/validators'
 import Community from '../models/community'
 import People from '../models/people'
 import { createToken } from './auth'
+import { sendResetPassword } from './emails'
 
 export const getPeople = async (req, res) => {
   try {
@@ -126,6 +127,30 @@ export const updatePassword = async (req, res) => {
     )
   } catch (err) {
     return res.status(500).json({ message: 'Erro desconhecido ao atualizar as credenciais', err })
+  }
+}
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { email } = req.body
+    await People.findOne(
+      {
+        email
+      }, async (err, people) => {
+        if (err) throw err
+        if (!people) return res.status(404).json({ message: 'Email não cadastrado' })
+        const newPassword = passwordGenerate()
+        people.password = md5(newPassword)
+        await people.save()
+        if (await sendResetPassword(email, newPassword)) {
+          return res.json({ message: 'Senha alterada e enviada por email' })
+        } else {
+          throw err
+        }
+      }
+    )
+  } catch (err) {
+    return res.status(500).json({ message: 'Erro desconhecido ao atualizar as credenciais da comunidade', err })
   }
 }
 

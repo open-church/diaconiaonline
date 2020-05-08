@@ -8,3 +8,5 @@ export const slugGenerate = (name) => {
     .replace(/[^\w-]+/g, '')
     .replace(/--+/g, '-')
 }
+
+export const passwordGenerate = (size) => Math.random().toString(36).slice(-(size || 8)).toUpperCase()
