@@ -75,9 +75,18 @@ export const H2 = styled.h2`
   }
 `
 
+export const Code = styled.span`
+  background: ${colors.burningOrange};
+  border-radius: 4px;
+  color: ${colors.white};
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 0 8px;
+`
+
 export const P = styled.p`
   color: ${colors.white};
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1.5;
   @media (max-width: 992px) {
     font-size: 0.875rem;

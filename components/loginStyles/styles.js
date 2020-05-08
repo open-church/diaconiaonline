@@ -99,6 +99,7 @@ export const Error = styled.span`
 
 export const Forgot = styled.a`
   color: ${color};
+  cursor: pointer;
   display: inline-block;
   line-height: 1.375;
   margin: 15px 0;

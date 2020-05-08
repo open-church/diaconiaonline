@@ -75,6 +75,14 @@ class Api {
   async getCommunityRelations () {
     return api.get('/utils/community-relations').then(response => response).catch(error => error)
   }
+
+  async forgotCommunityPassword (data) {
+    return api.put('/community/password/reset', data).then(response => response).catch(error => error)
+  }
+
+  async forgotPeoplePassword (data) {
+    return api.put('/people/password/reset', data).then(response => response).catch(error => error)
+  }
 }
 
 export default new Api()

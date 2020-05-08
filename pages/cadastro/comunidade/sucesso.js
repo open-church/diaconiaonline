@@ -11,13 +11,12 @@ import * as Flex from '../../../components/loginStyles/styles'
 import * as S from '../../../components/signupStyles/styles'
 import Api from '../../../services/api'
 
-function CommunitySuccess (props) {
+function CommunitySuccess ({ credentials }) {
   const [loading, setLoading] = useState(true)
   const [code, setCode] = useState(null)
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    const { credentials } = props
     const getCode = async () => {
       const { data } = await Api.getCommunity()
       setLoading(false)
@@ -27,7 +26,7 @@ function CommunitySuccess (props) {
   }, [])
 
   return (
-    <Layout loading={loading}>
+    <Layout loading={loading} credentials={credentials}>
       <ThemeProvider theme={{ mode: 'community' }}>
         <Flex.PageContainer fluid>
           <B.Row>
@@ -48,7 +47,7 @@ function CommunitySuccess (props) {
                   </>
                 ) }
                 <S.ButtonsWrapper>
-                  <E.CustomButton tag={B.A} href="/login/comunidade" color="info">Fazer login</E.CustomButton>
+                  <E.CustomButton tag={B.A} href="/dashboard/comunidade" color="info">Acessar Painel</E.CustomButton>
                   <E.CustomButton tag={B.A} href="/" color="danger">Página Inicial</E.CustomButton>
                 </S.ButtonsWrapper>
               </S.ContentWrapper>

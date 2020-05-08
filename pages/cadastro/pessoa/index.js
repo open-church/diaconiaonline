@@ -23,9 +23,13 @@ function UserSignup (props) {
   const [feedbackMessage, setFeedbackMessage] = useState({ show: false, message: '' })
   const [modal, setModal] = useState(false)
   const [step, setStep] = useState(1)
+  const [communityCode, setCommunityCode] = useState('')
 
   useEffect(() => {
-    const { credentials } = props
+    const { credentials, query: { code } } = props
+    setCommunityCode(code || '')
+    console.log('code', code)
+
     const getList = async () => {
       const occupations = await Api.getOccupations()
       const relations = await Api.getCommunityRelations()
@@ -91,7 +95,7 @@ function UserSignup (props) {
                 <Formik
                   initialValues={{
                     name: '',
-                    communityCode: '',
+                    communityCode,
                     cpf: '',
                     email: '',
                     emailConfirmation: '',
@@ -123,7 +127,7 @@ function UserSignup (props) {
                   validationSchema={UserRegisterSchema}
                   onSubmit={onSubmit}
                 >
-                  {({ errors, touched, values, setFieldValue, setErrors }) => (
+                  {({ errors, touched, values, setFieldValue, setErrors, handleChange }) => (
                     <>
                       <S.CustomForm hide={step !== 1}>
                         <S.Label>
@@ -133,7 +137,7 @@ function UserSignup (props) {
                         </S.Label>
                         <S.Label width="33%">
                           <legend>Código da Comunidade*</legend>
-                          <S.CustomField name="communityCode" placeholder="Insira o código da sua comunidade" />
+                          <S.CustomField onChange={handleChange} value={values.communityCode} name="communityCode" placeholder="Insira o código da sua comunidade" />
                           {errors.communityCode && touched.communityCode ? <S.Error>{errors.communityCode}</S.Error> : null}
                         </S.Label>
                         <S.Label width="33%">
@@ -329,7 +333,8 @@ function UserSignup (props) {
 }
 
 UserSignup.propTypes = {
-  credentials: PropTypes.object
+  credentials: PropTypes.object,
+  query: PropTypes.object
 }
 
 export default UserSignup
