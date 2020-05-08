@@ -39,7 +39,7 @@
     "react-text-mask": "^5.4.3",
     "styled-components": "^5.1.0",
     "styled-theming": "^2.2.0",
-    "yup": "^0.28.3"
+    "yup": "^0.28.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
