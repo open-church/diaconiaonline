@@ -80,8 +80,6 @@ function UserSignup (props) {
     setModal(!modal)
   }
 
-  console.log('communityCode', communityCode)
-
   return (
     <Layout loading={loading}>
       <ThemeProvider theme={{ mode: 'user' }}>

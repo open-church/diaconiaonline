@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react'
 
 import * as B from '@bootstrap-styled/v4'
 import { Formik, Form } from 'formik'
-import Link from 'next/link'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
-import * as E from '../../components/elements/styles'
-import Layout from '../../components/layout'
-import * as S from '../../components/loginStyles/styles'
-import { saveCredentials } from '../../helpers/auth'
-import { LoginSchema } from '../../schemas/login'
-import Api from '../../services/api'
+import Alert from '../../../components/alert'
+import * as E from '../../../components/elements/styles'
+import Layout from '../../../components/layout'
+import * as S from '../../../components/loginStyles/styles'
+import { ForgotPasswordSchema } from '../../../schemas/login'
+import Api from '../../../services/api'
 
-function PeopleLogin (props) {
+function PeopleForgotPassword (props) {
   const [loading, setLoading] = useState(true)
+  const [feedbackMessage, setFeedbackMessage] = useState({ show: false, type: 'error', message: '' })
 
   useEffect(() => {
     const { credentials } = props
@@ -27,13 +27,18 @@ function PeopleLogin (props) {
     }
   }, [])
 
-  const login = async values => {
+  const requestNewPassword = async values => {
     try {
-      const { data } = await Api.login({ ...values, entity: 'people' })
-      await saveCredentials({ ...data })
-      Router.push('/dashboard/pessoa')
+      setLoading(true)
+      const response = await Api.forgotPeoplePassword({ ...values })
+      if (response.status !== 200) throw new Error(response.data.message)
+      setFeedbackMessage({ show: true, type: 'success', message: 'Uma nova senha foi gerada e enviada por e-mail' })
     } catch (err) {
+      window.scrollTo(0, 0)
+      setFeedbackMessage({ show: true, type: 'error', message: err.message })
       console.log('err', err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -46,30 +51,22 @@ function PeopleLogin (props) {
             </S.BgCol>
             <B.Col lg="7" xl="5">
               <S.ContentWrapper>
-                <S.H3>Faça o login</S.H3>
-                <S.P>Informe seu e-mail e senha nos campos indicados para continuar.</S.P>
+                <S.H3>Nova senha</S.H3>
+                <S.P>Informe seu e-mail enviaremos uma nova senha para acesso.</S.P>
+                {feedbackMessage.show && <Alert message={feedbackMessage.message} type={feedbackMessage.type} />}
                 <Formik
-                  initialValues={{
-                    email: '',
-                    password: ''
-                  }}
-                  validationSchema={LoginSchema}
-                  onSubmit={login}
+                  initialValues={{ email: '' }}
+                  validationSchema={ForgotPasswordSchema}
+                  onSubmit={requestNewPassword}
                 >
                   {({ errors, touched }) => (
                     <Form>
                       <S.Label htmlFor="email">E-mail</S.Label>
                       <S.CustomField name="email" type="email" placeholder="Insira seu e-mail" />
                       {errors.email && touched.email ? <S.Error>{errors.email}</S.Error> : null}
-                      <S.Label htmlFor="password">Senha</S.Label>
-                      <S.CustomField name="password" placeholder="Insira sua senha" type="password" />
-                      {errors.password && touched.password ? (
-                        <S.Error>{errors.password}</S.Error>
-                      ) : null}
-                      <Link href='/'><S.Forgot>Esqueci minha senha</S.Forgot></Link>
                       <S.ButtonsWrapper>
-                        <E.CustomButton width="42%" type="submit" color="primary">Fazer login</E.CustomButton>
-                        <E.CustomButton tag={B.A} href="/cadastro/pessoa" width="54%" color="secondary">Cadastrar membro</E.CustomButton>
+                        <E.CustomButton width="42%" type="submit" color="primary">Solicitar nova senha</E.CustomButton>
+                        <E.CustomButton tag={B.A} href="/login/pessoa" width="54%" color="secondary">Voltar</E.CustomButton>
                       </S.ButtonsWrapper>
                     </Form>
                   )}
@@ -83,8 +80,8 @@ function PeopleLogin (props) {
   )
 }
 
-PeopleLogin.propTypes = {
+PeopleForgotPassword.propTypes = {
   credentials: PropTypes.object
 }
 
-export default PeopleLogin
+export default PeopleForgotPassword

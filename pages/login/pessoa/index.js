@@ -7,15 +7,17 @@ import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
-import * as E from '../../components/elements/styles'
-import Layout from '../../components/layout'
-import * as S from '../../components/loginStyles/styles'
-import { saveCredentials } from '../../helpers/auth'
-import { LoginSchema } from '../../schemas/login'
-import Api from '../../services/api'
+import Alert from '../../../components/alert'
+import * as E from '../../../components/elements/styles'
+import Layout from '../../../components/layout'
+import * as S from '../../../components/loginStyles/styles'
+import { saveCredentials } from '../../../helpers/auth'
+import { LoginSchema } from '../../../schemas/login'
+import Api from '../../../services/api'
 
-function CommunityLogin (props) {
+function PeopleLogin (props) {
   const [loading, setLoading] = useState(true)
+  const [feedbackMessage, setFeedbackMessage] = useState({ show: false, message: '' })
 
   useEffect(() => {
     const { credentials } = props
@@ -29,17 +31,21 @@ function CommunityLogin (props) {
 
   const login = async values => {
     try {
-      const { data } = await Api.login({ ...values, entity: 'community' })
+      setLoading(true)
+      const { data } = await Api.login({ ...values, entity: 'people' })
       await saveCredentials({ ...data })
-      Router.push('/dashboard/comunidade')
+      Router.push('/dashboard/pessoa')
     } catch (err) {
+      window.scrollTo(0, 0)
+      setFeedbackMessage({ show: true, message: err.message })
       console.log('err', err)
+      setLoading(false)
     }
   }
 
   return (
     <Layout loading={loading}>
-      <ThemeProvider theme={{ mode: 'community' }}>
+      <ThemeProvider theme={{ mode: 'user' }}>
         <S.PageContainer fluid>
           <B.Row>
             <S.BgCol lg="5" xl="7">
@@ -48,6 +54,7 @@ function CommunityLogin (props) {
               <S.ContentWrapper>
                 <S.H3>Faça o login</S.H3>
                 <S.P>Informe seu e-mail e senha nos campos indicados para continuar.</S.P>
+                {feedbackMessage.show && <Alert message={feedbackMessage.message} type="error" />}
                 <Formik
                   initialValues={{
                     email: '',
@@ -66,10 +73,10 @@ function CommunityLogin (props) {
                       {errors.password && touched.password ? (
                         <S.Error>{errors.password}</S.Error>
                       ) : null}
-                      <Link href='/'><S.Forgot>Esqueci minha senha</S.Forgot></Link>
+                      <Link href='/login/pessoa/nova-senha' title="Esqueci a senha"><S.Forgot>Esqueci minha senha</S.Forgot></Link>
                       <S.ButtonsWrapper>
-                        <E.CustomButton width="42%" type="submit" color="info">Fazer login</E.CustomButton>
-                        <E.CustomButton tag={B.A} href="/cadastro/comunidade" width="54%" color="danger">Cadastrar comunidade</E.CustomButton>
+                        <E.CustomButton width="42%" type="submit" color="primary">Fazer login</E.CustomButton>
+                        <E.CustomButton tag={B.A} href="/cadastro/pessoa" width="54%" color="secondary">Cadastrar membro</E.CustomButton>
                       </S.ButtonsWrapper>
                     </Form>
                   )}
@@ -83,8 +90,8 @@ function CommunityLogin (props) {
   )
 }
 
-CommunityLogin.propTypes = {
+PeopleLogin.propTypes = {
   credentials: PropTypes.object
 }
 
-export default CommunityLogin
+export default PeopleLogin
