@@ -52,7 +52,7 @@ export const createCommunity = async (req, res) => {
       }, async (err, community) => {
         if (err) throw err
         try {
-          if (community) return res.status(400).json({ message: 'Comunidade já cadastrada' })
+          if (community) return res.status(400).json({ message: 'Email da comunidade já cadastrado' })
           if (invalid.email(email)) return res.status(400).json({ message: 'Email inválido' })
           if (invalid.communityCNPJ(cnpj)) return res.status(400).json({ message: 'CNPJ inválido' })
           if (invalid.address(address)) return res.status(400).json({ message: 'CEP inválido' })
