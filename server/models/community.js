@@ -48,7 +48,7 @@ const communitySchema = new mongoose.Schema({
     number: String,
     state: String,
     street: String,
-    zipCode: Number
+    zipCode: String
   }
 },
 {
