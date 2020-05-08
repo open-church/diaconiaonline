@@ -8,12 +8,11 @@ import * as S from '../../components/dashboard/styles'
 import Layout from '../../components/layout'
 import Api from '../../services/api'
 
-function UserDashboard (props) {
+function UserDashboard ({ credentials }) {
   const [loading, setLoading] = useState(true)
   const [people, setPeople] = useState({})
 
   useEffect(() => {
-    const { credentials } = props
     const getPeople = async () => {
       const { data } = await Api.getPeople()
       setPeople(data)
@@ -38,7 +37,7 @@ function UserDashboard (props) {
   }
 
   return (
-    <Layout loading={loading}>
+    <Layout loading={loading} credentials={credentials}>
       <S.Wrapper>
         <S.TopContainer fluid/>
         <S.CustomContainer>

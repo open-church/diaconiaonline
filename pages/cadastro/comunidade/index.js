@@ -25,8 +25,8 @@ function CommunitySignup (props) {
   useEffect(() => {
     const { credentials } = props
     if (credentials && credentials.entity) {
-      credentials.entity === 'people' && Router.push('/atualizar/pessoa')
-      credentials.entity === 'community' && Router.push('/atualizar/comunidade')
+      credentials.entity === 'people' && Router.push('/dashboard/pessoa')
+      credentials.entity === 'community' && Router.push('/dashboard/comunidade')
     } else {
       setLoading(false)
     }
