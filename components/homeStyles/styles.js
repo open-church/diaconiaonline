@@ -30,6 +30,11 @@ export const GrayContainer = styled(Container)`
   width: auto; 
 `
 
+export const WildContainer = styled(Container)`
+  background: ${colors.wildSand};
+  width: auto; 
+`
+
 export const CustomRow = styled(Row)`
   padding: 20px 0;
 `
@@ -37,7 +42,7 @@ export const CustomRow = styled(Row)`
 export const BlueCol = styled(Col)`
   display: flex;
   align-items: flex-end;
-  background: linear-gradient(90deg,transparent 50%,#12648B 50%);
+  background: linear-gradient(90deg,transparent 50%,${colors.matisse}  50%);
   justify-content: center;
 
   @media (max-width: 992px) {
