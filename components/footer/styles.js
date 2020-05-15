@@ -10,8 +10,14 @@ export const Footer = styled.footer`
   height: 40px;
   line-height: 3;
   width: 100%;
+
+  a {
+    color: ${colors.white};
+  }
 `
 
 export const FooterContainer = styled(Container)`
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 `
