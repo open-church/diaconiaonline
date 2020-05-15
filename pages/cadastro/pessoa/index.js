@@ -190,7 +190,7 @@ function UserSignup (props) {
                                 {...field}
                                 placeholder="Insira o CEP aqui"
                                 mask={zipCodeMask}
-                                id="cpf"
+                                id="zipCode"
                                 type="text"
                                 onBlur={async (e) => {
                                   const address = await getAddress(values)
