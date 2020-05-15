@@ -77,7 +77,8 @@ function CommunitySignup (props) {
             <B.Col lg="8" >
               <S.ContentWrapper>
                 <S.H3>Preencha seus dados</S.H3>
-                <S.P>Comece a preencher o cadastro de sua comunidade em nossa plataforma indicando seus dados de registro.</S.P>
+                <S.P>Comece a preencher o cadastro de sua comunidade em nossa plataforma indicando seus dados de registro.
+                  <br/> <b>Todas as informações são privadas e acessíveis apenas pela comunidade.</b></S.P>
                 {feedbackMessage.show && <Alert message={feedbackMessage.message} type="error" />}
                 <Formik
                   initialValues={{
@@ -225,49 +226,50 @@ function CommunitySignup (props) {
                       <S.CustomForm hide={step !== 2}>
                         <S.Label width="50%">
                           <legend>Dinheiro para ajuda</legend>
-                          <S.CustomField name="stock.money" placeholder="Insira o nome aqui" />
+                          <S.CustomField name="stock.money" placeholder="Insira o dinheiro disponível para este fim" />
                           {errors.money && touched.money ? <S.Error>{errors.money}</S.Error> : null}
                         </S.Label>
                         <S.Label width="50%">
                           <legend>Cestas básicas disponíveis</legend>
-                          <S.CustomField name="stock.basicBaskets" placeholder="Insira o nome aqui" />
+                          <S.CustomField name="stock.basicBaskets" placeholder="Insira a quantidade de cestas disponíveis" />
                           {errors.basicBaskets && touched.basicBaskets ? <S.Error>{errors.basicBaskets}</S.Error> : null}
                         </S.Label>
                         <S.Label width="50%">
                           <legend>Kits de higiene disponíveis</legend>
-                          <S.CustomField name="stock.hygieneProducts" placeholder="Insira o nome aqui" />
+                          <S.CustomField name="stock.hygieneProducts" placeholder="Insira a quantidade de kits de higiene disponíveis" />
                           {errors.hygieneProducts && touched.hygieneProducts ? <S.Error>{errors.hygieneProducts}</S.Error> : null}
                         </S.Label>
                         <S.Label width="50%">
                           <legend>EPIs disponíveis</legend>
-                          <S.CustomField name="stock.ppe" placeholder="Insira o nome aqui" />
+                          <S.CustomField name="stock.ppe" placeholder="Insira a quantidade de EPIs disponíveis" />
                           {errors.ppe && touched.ppe ? <S.Error>{errors.ppe}</S.Error> : null}
                         </S.Label>
                         <S.H4>Dados bancários da instituição</S.H4>
                         <S.Label width="50%">
                           <legend>Agência</legend>
-                          <S.CustomField name="financialDetails.agency" placeholder="Insira o nome aqui" />
+                          <S.CustomField name="financialDetails.agency" placeholder="Insira a sua agência aqui" />
                           {errors.agency && touched.agency ? <S.Error>{errors.agency}</S.Error> : null}
                         </S.Label>
                         <S.Label width="50%">
                           <legend>Conta</legend>
-                          <S.CustomField name="financialDetails.account" placeholder="Insira o nome aqui" />
+                          <S.CustomField name="financialDetails.account" placeholder="Insira a sua conta bancária aqui" />
                           {errors.account && touched.account ? <S.Error>{errors.account}</S.Error> : null}
                         </S.Label>
                         <S.Label width="50%">
                           <legend>Banco</legend>
-                          <S.CustomField name="financialDetails.bank" placeholder="Insira o nome aqui" />
+                          <S.CustomField name="financialDetails.bank" placeholder="Insira o seu banco aqui" />
                           {errors.bank && touched.bank ? <S.Error>{errors.bank}</S.Error> : null}
                         </S.Label>
                         <S.Label width="50%">
-                          <legend>CNPJ</legend>
-                          <S.CustomField name="financialDetails.doc" placeholder="Insira o nome aqui" />
+                          <legend>CNPJ/CPF</legend>
+                          <S.CustomField name="financialDetails.doc" placeholder="Insira o CNPJ ou CPF da conta aqui" />
                           {errors.doc && touched.doc ? <S.Error>{errors.doc}</S.Error> : null}
                         </S.Label>
                         <S.Label width="100%">
                           <legend>Titular</legend>
-                          <S.CustomField name="financialDetails.accountName" placeholder="Insira o nome aqui" />
-                          {errors.accountName && touched.accountName ? <S.Error>{errors.accountName}</S.Error> : null}
+                          <S.CustomField name="financialDetails.accountName" placeholder="Insira o nome completo do titular da conta aqui" />
+                          {errors.accountName && touched.accountName ? <S.Error>{
+                            errors.accountName}</S.Error> : null}
                         </S.Label>
                         <S.CheckBoxLabel>
                           <S.CustomCheckbox name="accept" checked={values.accept} onChange={() => setFieldValue('accept', !values.accept)}/>
