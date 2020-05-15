@@ -16,7 +16,7 @@ import { cpfMask, zipCodeMask } from '../../../helpers/mask'
 import { UserRegisterSchema } from '../../../schemas/userRegister'
 import Api from '../../../services/api'
 
-function UserSignup (props) {
+function UserSignup(props) {
   const [relations, setRelations] = useState([])
   const [occupations, setOccupations] = useState([])
   const [loading, setLoading] = useState(true)
@@ -37,8 +37,8 @@ function UserSignup (props) {
       setRelations(relations.data)
     }
     if (credentials && credentials.entity) {
-      credentials.entity === 'people' && Router.push('/atualizar/pessoa')
-      credentials.entity === 'community' && Router.push('/atualizar/comunidade')
+      credentials.entity === 'people' && Router.push('/dashboard/pessoa')
+      credentials.entity === 'community' && Router.push('/dashboard/comunidade')
     } else {
       setLoading(false)
       getList()
@@ -182,7 +182,7 @@ function UserSignup (props) {
                         </S.Label>
                         <S.Label width="33%">
                           <legend>País</legend>
-                          <S.CustomField name="address.country" placeholder="Preencha CEP" disabled/>
+                          <S.CustomField name="address.country" placeholder="Preencha CEP" disabled />
                           {errors.country && touched.country ? <S.Error>{errors.country}</S.Error> : null}
                         </S.Label>
                         <S.Label width="33%">
@@ -277,11 +277,11 @@ function UserSignup (props) {
                         <S.CustomFieldSet width="40%">
                           <legend>Portador de necessidades especiais?</legend>
                           <div>
-                            <label><input type="radio" value="true" checked={values.specialNeeds.value} name="specialNeeds.value" onChange={() => setFieldValue('specialNeeds.value', true)}/> Sim</label>
+                            <label><input type="radio" value="true" checked={values.specialNeeds.value} name="specialNeeds.value" onChange={() => setFieldValue('specialNeeds.value', true)} /> Sim</label>
                             <label><input type="radio" value="false" checked={!values.specialNeeds.value} name="specialNeeds.value" onChange={() => {
                               setFieldValue('specialNeeds.value', false)
                               setFieldValue('specialNeeds.description', '')
-                            }}/> Não</label>
+                            }} /> Não</label>
                           </div>
                         </S.CustomFieldSet>
                         <S.Label width="60%">
@@ -292,11 +292,11 @@ function UserSignup (props) {
                         <S.CustomFieldSet width="40%">
                           <legend>Utiliza medicação controlada?</legend>
                           <div>
-                            <label><input type="radio" value="true" checked={values.controlledMedication.value} name="controlledMedication.value" onChange={() => setFieldValue('controlledMedication.value', true)}/> Sim</label>
+                            <label><input type="radio" value="true" checked={values.controlledMedication.value} name="controlledMedication.value" onChange={() => setFieldValue('controlledMedication.value', true)} /> Sim</label>
                             <label><input type="radio" value="true" checked={!values.controlledMedication.value} name="controlledMedication.value" onChange={() => {
                               setFieldValue('controlledMedication.value', false)
                               setFieldValue('controlledMedication.description', '')
-                            }}/> Não</label>
+                            }} /> Não</label>
                           </div>
                         </S.CustomFieldSet>
                         <S.Label width="60%">
@@ -305,7 +305,7 @@ function UserSignup (props) {
                           {errors.description && touched.description ? <S.Error>{errors.description}</S.Error> : null}
                         </S.Label>
                         <S.CheckBoxLabel>
-                          <S.CustomCheckbox name="accept" checked={values.accept} onChange={() => setFieldValue('accept', !values.accept)}/>
+                          <S.CustomCheckbox name="accept" checked={values.accept} onChange={() => setFieldValue('accept', !values.accept)} />
                           <S.Checkmark></S.Checkmark>
                         Li e aceito os <S.TermsLink onClick={handleModal}>Termos de Uso</S.TermsLink>
                         </S.CheckBoxLabel>
