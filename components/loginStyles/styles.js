@@ -67,7 +67,7 @@ export const H3 = styled.h2`
 `
 
 export const P = styled.p`
-  color: ${color};
+  color: ${colors.outerSpace};
   font-size: 20px;
   line-height: 1.5;
 `
@@ -94,7 +94,7 @@ export const Label = styled.label`
 export const Error = styled.span`
   font-size: 0.85rem;
   color: ${colors.coralRed};
-  float: inline-end;
+  float: right;
 `
 
 export const Forgot = styled.a`
