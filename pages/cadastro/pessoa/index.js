@@ -81,7 +81,7 @@ function UserSignup (props) {
   }
 
   return (
-    <Layout loading={loading}>
+    <Layout loading={loading} navBarBgActive>
       <ThemeProvider theme={{ mode: 'user' }}>
         <S.PageContainer>
           <B.Row>

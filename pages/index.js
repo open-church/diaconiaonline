@@ -8,7 +8,7 @@ import Layout from '../components/layout'
 
 function HomePage () {
   return (
-    <Layout navLight>
+    <Layout navBarBgActive>
       {/* <B.Container>
         <B.Row>
           <B.Col lg="5" xl="6" />

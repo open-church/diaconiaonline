@@ -5,13 +5,16 @@ import PropTypes from 'prop-types'
 import Footer from '../footer'
 import Loading from '../loading/'
 import Navbar from '../navBar/'
+import * as S from './styles'
 
-function Layout ({ children, loading, credentials }) {
+function Layout ({ children, loading, credentials, navBarBgActive }) {
   return (
     <>
-      <Navbar credentials={credentials}/>
+      <Navbar credentials={credentials} bgActive={navBarBgActive}/>
       {loading && <Loading />}
-      {children}
+      <S.Wrapper withPaddingTop={navBarBgActive}>
+        {children}
+      </S.Wrapper>
       <Footer />
     </>
   )
@@ -20,7 +23,8 @@ function Layout ({ children, loading, credentials }) {
 Layout.propTypes = {
   credentials: PropTypes.object,
   children: PropTypes.node,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  navBarBgActive: PropTypes.bool
 }
 
 export default Layout

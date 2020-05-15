@@ -68,7 +68,7 @@ function CommunitySignup (props) {
   }
 
   return (
-    <Layout loading={loading}>
+    <Layout loading={loading} navBarBgActive>
       <ThemeProvider theme={{ mode: 'community' }}>
         <S.PageContainer>
           <B.Row>

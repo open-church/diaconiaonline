@@ -14,11 +14,11 @@ import PropTypes from 'prop-types'
 import { logout } from '../../helpers/auth'
 import * as S from './styles'
 
-function Navbar ({ credentials }) {
+function Navbar ({ credentials, bgActive }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <S.Navbar fixed="top" toggleable="lg" className={open ? 'open' : ''}>
+    <S.Navbar fixed="top" toggleable="lg" className={open ? 'open' : ''} bgActive={bgActive}>
       <Container>
         <div className="d-flex justify-content-between">
           <NavbarBrand tag={A} href="/" title="Acessar página inicial">
@@ -47,7 +47,8 @@ function Navbar ({ credentials }) {
 }
 
 Navbar.propTypes = {
-  credentials: PropTypes.object
+  credentials: PropTypes.object,
+  bgActive: PropTypes.bool
 }
 
 export default Navbar
