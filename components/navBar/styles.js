@@ -11,6 +11,11 @@ export const Navbar = styled(BNavbar)`
     position: fixed;
     width: calc(100% - 30px);
     z-index: 10;
+    
+    ${({ bgActive }) => bgActive && `
+      background: ${colors.white};
+      box-shadow: 1px 1px 4px ${colors.alto};
+    `};
   }
 
   &.open {

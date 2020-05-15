@@ -68,7 +68,7 @@ function CommunitySignup (props) {
   }
 
   return (
-    <Layout loading={loading}>
+    <Layout loading={loading} navBarBgActive>
       <ThemeProvider theme={{ mode: 'community' }}>
         <S.PageContainer>
           <B.Row>
@@ -77,8 +77,8 @@ function CommunitySignup (props) {
             <B.Col lg="8" >
               <S.ContentWrapper>
                 <S.H3>Preencha seus dados</S.H3>
-                <S.P>Comece a preencher o cadastro de sua comunidade em nossa plataforma indicando seus dados de registro.
-                  <br/> <b>Todas as informações são privadas e acessíveis apenas pela comunidade.</b></S.P>
+                <S.P>Comece a preencher o cadastro de sua comunidade em nossa plataforma indicando seus dados de registro.</S.P>
+                <S.P><b>Todas as informações são para o controle dos recursos disponíveis e estarão acessíveis apenas pela comunidade.</b></S.P>
                 {feedbackMessage.show && <Alert message={feedbackMessage.message} type="error" />}
                 <Formik
                   initialValues={{
