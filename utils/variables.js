@@ -5,6 +5,7 @@ export const colors = {
   boulder: '#797979',
   brightSun: '#FFD33A',
   burningOrange: '#FF703A',
+  orangePeel: '#FFA000',
   cloudBurst: '#22304E',
   concrete: '#f2f2f2',
   coralRed: '#FF3E46',

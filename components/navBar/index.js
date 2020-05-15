@@ -29,7 +29,7 @@ function Navbar ({ credentials, bgActive }) {
         <Collapse navbar isOpen={open}>
           <Nav navbar className="ml-auto my-2 my-lg-0">
             <NavItem>
-              <S.NavLink href="/" title="Quem somos">Quem somos</S.NavLink>
+              <S.NavLink href="/#sobre-diaconia-online" title="Quem somos">Quem somos</S.NavLink>
             </NavItem>
             {credentials && credentials.token && (
               <NavItem>

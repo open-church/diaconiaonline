@@ -52,7 +52,7 @@ function HomePage () {
             </B.Col>
           </S.CustomRow>
         </B.Container>
-        <S.CustomContainer bg="matisse" fluid>
+        <S.CustomContainer bg="matisse" fluid id="sobre-diaconia-online">
           <B.Container>
             <B.Row>
               <S.BlueCol lg="6">
@@ -69,7 +69,7 @@ function HomePage () {
         </S.CustomContainer>
         <B.Container>
           <S.CustomRow style={{ paddingBottom: 0 }}>
-            <B.Col><S.H2 color="burningOrange">Como Funciona?</S.H2></B.Col>
+            <B.Col><S.H2 color="orangePeel">Como Funciona?</S.H2></B.Col>
           </S.CustomRow>
           <S.CustomRow style={{ paddingTop: 0 }}>
             <S.StepsCol>

@@ -88,12 +88,12 @@ export const Img = styled.img`
 `
 
 export const StepsCol = styled(Col)`
-  box-shadow: 5px 5px 20px rgba(0,0,0,0.30);;
-  padding: 15px;  
-  margin: 0 10px;
-  text-align: center;
 
   &&& {
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.30);;
+    padding: 15px;  
+    margin: 0 10px;
+    text-align: center;
     max-width: calc(25% - 20px);
 
     @media (max-width: 992px) {
