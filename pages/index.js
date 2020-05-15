@@ -52,7 +52,7 @@ function HomePage () {
             </B.Col>
           </S.CustomRow>
         </B.Container>
-        <S.CustomContainer bg="matisse" fluid>
+        <S.CustomContainer bg="matisse" fluid id="sobre-diaconia-online">
           <B.Container>
             <B.Row>
               <S.BlueCol lg="6">
@@ -69,7 +69,7 @@ function HomePage () {
         </S.CustomContainer>
         <B.Container>
           <S.CustomRow style={{ paddingBottom: 0 }}>
-            <B.Col><S.H2 color="burningOrange">Como Funciona?</S.H2></B.Col>
+            <B.Col><S.H2 color="orangePeel">Como Funciona?</S.H2></B.Col>
           </S.CustomRow>
           <S.CustomRow style={{ paddingTop: 0 }}>
             <S.StepsCol>
@@ -106,7 +106,7 @@ function HomePage () {
             </B.Col>
           </S.CustomRow>
         </B.Container>
-        <S.GrayContainer fluid>
+        <S.WildContainer fluid>
           <B.Container>
             <S.CustomRow>
               <B.Col lg="6">
@@ -114,16 +114,16 @@ function HomePage () {
                 <S.P>Veja quais são as formas para você ajudar o nosso projeto a chegar a mais pessoas:</S.P>
               </B.Col>
               <B.Col lg="6">
-                <S.H3 color="burningOrange">Divulgue nosso projeto</S.H3>
+                <S.H3 color="orangePeel">Divulgue nosso projeto</S.H3>
                 <S.P>Fale sobre o nosso projeto em suas redes sociais, para seus amigos e na sua igreja local, caso faça parte de uma.</S.P>
-                <S.H3 color="burningOrange">Contribua para o projeto</S.H3>
+                <S.H3 color="orangePeel">Contribua para o projeto</S.H3>
                 <S.P>Faça uma contribuição financeira para ajudar com os custos do projeto e continuar mantendo a plataforma 100% grátis.</S.P>
-                <S.H3 color="burningOrange">Seja um voluntário</S.H3>
+                <S.H3 color="orangePeel">Seja um voluntário</S.H3>
                 <S.P>Caso tenha interesse em ajudar a construir o Diaconia Online, cadastre-se clicando aqui.</S.P>
               </B.Col>
             </S.CustomRow>
           </B.Container>
-        </S.GrayContainer>
+        </S.WildContainer>
       </S.Wrapper>
     </Layout>
   )

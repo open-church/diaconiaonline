@@ -30,6 +30,11 @@ export const GrayContainer = styled(Container)`
   width: auto; 
 `
 
+export const WildContainer = styled(Container)`
+  background: ${colors.wildSand};
+  width: auto; 
+`
+
 export const CustomRow = styled(Row)`
   padding: 20px 0;
 `
@@ -37,7 +42,7 @@ export const CustomRow = styled(Row)`
 export const BlueCol = styled(Col)`
   display: flex;
   align-items: flex-end;
-  background: linear-gradient(90deg,transparent 50%,#12648B 50%);
+  background: linear-gradient(90deg,transparent 50%,${colors.matisse}  50%);
   justify-content: center;
 
   @media (max-width: 992px) {
@@ -88,12 +93,12 @@ export const Img = styled.img`
 `
 
 export const StepsCol = styled(Col)`
-  box-shadow: 5px 5px 20px rgba(0,0,0,0.30);;
-  padding: 15px;  
-  margin: 0 10px;
-  text-align: center;
 
   &&& {
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.30);;
+    padding: 15px;  
+    margin: 0 10px;
+    text-align: center;
     max-width: calc(25% - 20px);
 
     @media (max-width: 992px) {

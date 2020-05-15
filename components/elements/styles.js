@@ -3,11 +3,12 @@ import styled from 'styled-components'
 
 export const CustomButton = styled(Button)`
   && {
-    font-size: 1.25rem;
-    line-height: 2;
+    font-size: 1.10rem;
+    line-height: 60px;
     height: 60px;
     width: ${({ width }) => width || '48%'}; 
     max-width: 310px;
+    padding: 0 10px;
   }
 
   @media (max-width: 768px) {
