@@ -44,7 +44,7 @@ function CommunityDashboard ({ credentials }) {
   }, [])
 
   const numberWithDot = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : 'Não informado'
   }
 
   const handleFilter = (data) => {
