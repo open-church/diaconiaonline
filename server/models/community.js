@@ -17,6 +17,7 @@ const communitySchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    lowercase: true,
     required: true
   },
   password: {
