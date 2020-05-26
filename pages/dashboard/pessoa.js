@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 
 import * as S from '../../components/dashboard/styles'
 import Layout from '../../components/layout'
+import { getOccupation } from '../../helpers/formatData'
 import Api from '../../services/api'
 
 function UserDashboard ({ credentials }) {
@@ -52,7 +53,7 @@ function UserDashboard ({ credentials }) {
           <B.Row>
             <B.Col>
               <S.H2>{people.name}</S.H2>
-              <S.KeyValues>{people.email}{people.occupation && ` - ${people.occupation}`}</S.KeyValues>
+              <S.KeyValues>{people.email}{people.occupation && ` - ${getOccupation(people.occupation)}`}</S.KeyValues>
               <S.InfoWrapper>
                 <S.InfoBox>
                   <S.KeyValues bold specialFloat>{people.phone}</S.KeyValues>

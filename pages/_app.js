@@ -18,12 +18,29 @@ class MyApp extends App {
     return { pageProps, credentials, query: ctx.query }
   }
 
+  setGoogleTags () {
+    return {
+      __html: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}');
+      `
+    }
+  }
+
   render () {
     const { Component, credentials, query, pageProps } = this.props
     return (
       <>
         <Head>
           <title>Diaconia.online</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#FF703A" />
+          <meta name="description" content="Organize e acompanhe os recursos de sua comunidade com um clique." />
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}></script>
+          <script dangerouslySetInnerHTML={this.setGoogleTags()} />
         </Head>
         <BootstrapProvider theme={{
           '$btn-primary-bg': `${colors.blueZodiac}`,

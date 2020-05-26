@@ -55,8 +55,8 @@ export const login = async (req, res) => {
   try {
     const { email, password, entity } = req.body
     const Model = entity === 'community' ? Community : People
-    const doc = await Model.findOne({ email, password: md5(password) })
-    if (!doc) return res.status(401).json({ message: 'Credenciais inválidas' })
+    const doc = await Model.findOne({ email: email.toLowerCase(), password: md5(password) })
+    if (!doc) return res.status(403).json({ message: 'Credenciais inválidas' })
     const token = createToken({ id: doc._id })
     doc.token = token
     doc.save()

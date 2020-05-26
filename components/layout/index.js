@@ -10,7 +10,7 @@ import * as S from './styles'
 function Layout ({ children, loading, credentials, navBarBgActive }) {
   return (
     <>
-      <Navbar credentials={credentials} bgActive={navBarBgActive}/>
+      <Navbar credentials={credentials} bgactive={navBarBgActive}/>
       {loading && <Loading />}
       <S.Wrapper withPaddingTop={navBarBgActive}>
         {children}
