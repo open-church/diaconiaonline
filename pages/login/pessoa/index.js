@@ -33,6 +33,7 @@ function PeopleLogin (props) {
     try {
       setLoading(true)
       const { data } = await Api.login({ ...values, entity: 'people' })
+      if (!data.email) throw new Error(data.message)
       await saveCredentials({ ...data })
       Router.push('/dashboard/pessoa')
     } catch (err) {

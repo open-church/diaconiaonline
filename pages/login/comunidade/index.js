@@ -33,6 +33,7 @@ function CommunityLogin (props) {
     try {
       setLoading(true)
       const { data } = await Api.login({ ...values, entity: 'community' })
+      if (!data.email) throw new Error(data.message)
       await saveCredentials({ ...data })
       Router.push('/dashboard/comunidade')
     } catch (err) {

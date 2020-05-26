@@ -43,9 +43,9 @@ function CommunityDashboard ({ credentials }) {
     credentials.entity === 'community' && getCommunity()
   }, [])
 
-  const numberWithDot = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  }
+  // const numberWithDot = (x) => {
+  //   return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '0'
+  // }
 
   const handleFilter = (data) => {
     const newFilter = []
@@ -92,7 +92,7 @@ function CommunityDashboard ({ credentials }) {
             </B.Col>
           </B.Row>
         </S.CustomContainer>
-        <S.MoneyWrapper>
+        {/* <S.MoneyWrapper>
           <img src="/images/ic-money.svg" />
           <div>
             <h2>{`R$ ${community.stock && community.stock.money ? community.stock.money.toLocaleString('pt-BR') : '0,00'}`}</h2>
@@ -104,24 +104,24 @@ function CommunityDashboard ({ credentials }) {
             <img src="/images/ic-food.svg" />
             <div>
               <h2>{community.stock && numberWithDot(community.stock.basicBaskets)}</h2>
-              <p>Cestas básicas</p>
+              <p>Cestas básicas disponíveis</p>
             </div>
           </S.ItemBox>
           <S.ItemBox>
             <img src="/images/ic-water.svg" />
             <div>
               <h2>{community.stock && numberWithDot(community.stock.hygieneProducts)}</h2>
-              <p>Kits de limpeza</p>
+              <p>Kits de limpeza disponíveis</p>
             </div>
           </S.ItemBox>
           <S.ItemBox>
             <img src="/images/ic-helmet.svg" />
             <div>
               <h2>{community.stock && numberWithDot(community.stock.ppe)}</h2>
-              <p>Equipamentos tipo EPI</p>
+              <p>EPIs disponíveis</p>
             </div>
           </S.ItemBox>
-        </S.ItemsWrapper>
+        </S.ItemsWrapper> */}
         <S.CardsWrapper>
           <S.CustomSelect
             classNamePrefix="react-select"
