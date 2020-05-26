@@ -43,9 +43,9 @@ function CommunityDashboard ({ credentials }) {
     credentials.entity === 'community' && getCommunity()
   }, [])
 
-  const numberWithDot = (x) => {
-    return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '0'
-  }
+  // const numberWithDot = (x) => {
+  //   return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '0'
+  // }
 
   const handleFilter = (data) => {
     const newFilter = []
