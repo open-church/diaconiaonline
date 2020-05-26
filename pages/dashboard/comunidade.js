@@ -92,7 +92,7 @@ function CommunityDashboard ({ credentials }) {
             </B.Col>
           </B.Row>
         </S.CustomContainer>
-        <S.MoneyWrapper>
+        {/* <S.MoneyWrapper>
           <img src="/images/ic-money.svg" />
           <div>
             <h2>{`R$ ${community.stock && community.stock.money ? community.stock.money.toLocaleString('pt-BR') : '0,00'}`}</h2>
@@ -121,7 +121,7 @@ function CommunityDashboard ({ credentials }) {
               <p>EPIs disponíveis</p>
             </div>
           </S.ItemBox>
-        </S.ItemsWrapper>
+        </S.ItemsWrapper> */}
         <S.CardsWrapper>
           <S.CustomSelect
             classNamePrefix="react-select"

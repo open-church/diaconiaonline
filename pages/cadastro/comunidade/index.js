@@ -224,7 +224,7 @@ function CommunitySignup (props) {
                         </S.ButtonsWrapper>
                       </S.CustomForm>
                       <S.CustomForm hide={step !== 2}>
-                        <S.Label width="50%">
+                        {/* <S.Label width="50%">
                           <legend>Dinheiro para ajuda</legend>
                           <S.CustomField name="stock.money" placeholder="Insira o dinheiro disponível para este fim" />
                           {errors.money && touched.money ? <S.Error>{errors.money}</S.Error> : null}
@@ -243,7 +243,7 @@ function CommunitySignup (props) {
                           <legend>EPIs disponíveis</legend>
                           <S.CustomField name="stock.ppe" placeholder="Insira a quantidade de EPIs disponíveis" />
                           {errors.ppe && touched.ppe ? <S.Error>{errors.ppe}</S.Error> : null}
-                        </S.Label>
+                        </S.Label> */}
                         <S.H4>Dados bancários da instituição</S.H4>
                         <S.Label width="50%">
                           <legend>Agência</legend>
