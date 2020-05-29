@@ -76,9 +76,8 @@ export const H2 = styled.h2`
 `
 
 export const Code = styled.span`
-  background: ${colors.burningOrange};
   border-radius: 4px;
-  color: ${colors.white};
+  color: ${colors.burningOrange};
   font-weight: bold;
   letter-spacing: 1px;
   padding: 0 8px;
@@ -303,6 +302,7 @@ export const CustomSelect = styled(Select)`
 `
 
 export const Card = styled.div`
+  background: ${colors.white};
   padding: 10px;
   box-shadow: 0 3px 6px rgba(13,2,2,0.30);
   box-sizing: border-box;
