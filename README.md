@@ -2,7 +2,7 @@
   <img src="https://www.diaconia.online/images/diaconia-online.svg" alt="Diaconia Online" width="150">
 </p>
 <p align="center">
-  <a href="https://diaconia.online">Diaconia.online</a> é um projeto Open Source de gestão de auxílio social para comunidades de fé 🚀
+  <a href="https://www.diaconia.online">Diaconia.online</a> é um projeto Open Source de gestão de auxílio social para comunidades de fé 🚀
 </p>
 
 ## Sumário
