@@ -19,7 +19,7 @@
 
 Primeiramente, obrigado por demonstrar apoio e interesse pelo projeto.
 
-Esse PDF é um resumo daquilo que estamos propondo e executando 
+Esse [PDF](https://drive.google.com/file/d/1rnj1RrA0YICL0xxgHodsOqEGMgPeEQmr/view?usp=sharingf) é um resumo daquilo que estamos propondo e executando. 
 
 
 ## Por quê?
