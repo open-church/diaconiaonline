@@ -17,7 +17,7 @@
 
 ## Olá 
 
-Primeiramente, obrigado por demonstrar apoio e interesse pelo projeto.
+Primeiramente, obrigado por demonstrar apoio e interesse pelo projeto. Qualquer dúvida, entre em contato conosco pelo email diaconiaon@gmail.com.
 
 Esse [PDF](https://drive.google.com/file/d/1rnj1RrA0YICL0xxgHodsOqEGMgPeEQmr/view?usp=sharingf) é um resumo daquilo que estamos propondo e executando. 
 
