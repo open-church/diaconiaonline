@@ -31,7 +31,7 @@
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.2.1",
-    "mongoose": "^5.9.16",
+    "mongoose": "^5.9.24",
     "next": "^9.4.2",
     "next-cookies": "^2.0.3",
     "react": "^16.13.1",
