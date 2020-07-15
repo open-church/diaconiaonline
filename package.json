@@ -43,9 +43,9 @@
     "yup": "^0.28.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/node": "^7.8.7",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.9.6",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
