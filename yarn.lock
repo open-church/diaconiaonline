@@ -4844,10 +4844,10 @@ jest-worker@24.9.0:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
 
-js-brasil@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/js-brasil/-/js-brasil-2.1.0.tgz#4788b0aa8e20e4e29d8a1a1c6bbec8d12c2ac973"
-  integrity sha512-p2DLQFUw8FB5PvxlvBrUtY3sjU0Bkl+HK2VUKDOqvEwiR0W7p7wnArqkbTp+CsaP5dkIpCECm6EIGptjs/S7Ag==
+js-brasil@^2.3.8:
+  version "2.3.8"
+  resolved "https://registry.yarnpkg.com/js-brasil/-/js-brasil-2.3.8.tgz#4b542b8cadefd78687ca256bab51ecf8125db9cb"
+  integrity sha512-Npoo8S98pC26vKSk5JRZY2efSKENtL7+En62T2olyukz7fvyxD60YlM2kCA3noyCptCml+hD59uNNHlN3zaONw==
   dependencies:
     randexp "^0.5.3"
     text-mask-addons "^3.8.0"
