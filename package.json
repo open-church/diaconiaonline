@@ -57,6 +57,6 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-standard": "^4.0.1",
     "faker": "^4.1.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.6"
   }
 }
