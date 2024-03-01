@@ -25,7 +25,7 @@
     "cep-promise": "^3.0.9",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.18.3",
     "formik": "^2.1.4",
     "js-brasil": "^2.1.0",
     "js-cookie": "^2.2.1",
