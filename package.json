@@ -28,7 +28,7 @@
     "express": "^4.17.1",
     "formik": "^2.1.4",
     "js-brasil": "^2.1.0",
-    "js-cookie": "^2.2.1",
+    "js-cookie": "^3.0.7",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.2.1",
     "mongoose": "^5.10.14",
